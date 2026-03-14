@@ -1188,3 +1188,11 @@ export const MODULES = {
   },
 
 }
+
+export function getModulesForLevel(levelId) {
+  return LEVELS.find(l => l.id === levelId)?.modules.map(id => MODULES[id]) || []
+}
+
+export function getModuleById(id) {
+  return MODULES[id] || null
+}
