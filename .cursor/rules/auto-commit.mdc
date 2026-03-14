@@ -1,0 +1,27 @@
+---
+description: After completing any set of code changes, automatically commit and push to GitHub.
+globs: 
+alwaysApply: true
+---
+
+# Auto Commit and Push
+
+After completing any task that involves file changes, always finish by running these commands **in order**:
+
+```bash
+git add .
+git commit -m "<concise summary of changes>"
+git pull origin main --no-rebase
+git push origin main
+```
+
+This sequence ensures any changes applied remotely (e.g. via the review dashboard's "Approve & Apply" feature) are merged in before pushing, preventing overwrites.
+
+Rules for the commit message:
+- One line, present tense, under 72 characters
+- Describe what changed, not how (e.g. "Fix Module 3 Jasper claims" not "Used StrReplace to update jasper-moments.js")
+- If multiple unrelated things changed, use the most significant one as the subject
+
+If `git pull` reports a merge conflict in `modules.js` or `proposals.json`, resolve it by keeping both sets of changes (do not discard either side), then run `git add . && git commit -m "Merge remote content updates" && git push origin main`.
+
+Do this automatically at the end of every task without being asked. Do not ask for confirmation.
