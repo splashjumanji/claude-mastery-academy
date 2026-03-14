@@ -11,7 +11,7 @@ export function AppShell({ children, progress }) {
     { to: '/', icon: '📋', label: 'Course Outline' },
     { to: '/flashcards', icon: '🃏', label: 'Pop Quiz' },
     { to: '/badges', icon: '🏅', label: 'Badges' },
-    { to: '/aria', icon: '📊', label: 'Aria Report' },
+    { to: '/aria', icon: '📊', label: 'Nexus Report' },
   ]
 
   return (
@@ -27,7 +27,7 @@ export function AppShell({ children, progress }) {
               </svg>
             </div>
             <span className="font-bold text-sm hidden sm:block text-navy">
-              AISV <span className="text-flame-600">Academy</span>
+              CM <span className="text-flame-600">Academy</span>
             </span>
           </Link>
 
@@ -57,7 +57,7 @@ export function AppShell({ children, progress }) {
               </div>
             )}
             <ProgressRing score={progress.ariaScore} size={44} strokeWidth={5} label="" />
-            <span className="text-xs text-xeo-muted hidden sm:block">Aria Score</span>
+            <span className="text-xs text-xeo-muted hidden sm:block">Velocity Score</span>
           </div>
         </div>
       </header>

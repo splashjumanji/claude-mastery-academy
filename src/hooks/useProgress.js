@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 
-const STORAGE_KEY = 'xeo_academy_progress'
+const STORAGE_KEY = 'cm_academy_progress'
 
 const defaultState = {
   xp: 0,
@@ -17,7 +17,7 @@ const defaultState = {
 const LEVEL_THRESHOLDS = [
   { name: 'Apprentice',   min: 0,    color: 'text-gray-600',    bg: 'bg-gray-100' },
   { name: 'Practitioner', min: 300,  color: 'text-aria-700',    bg: 'bg-aria-100' },
-  { name: 'Strategist',   min: 700,  color: 'text-jasper-700',  bg: 'bg-jasper-100' },
+  { name: 'Architect',    min: 700,  color: 'text-jasper-700',  bg: 'bg-jasper-100' },
   { name: 'Expert',       min: 1200, color: 'text-amber-700',   bg: 'bg-amber-100' },
 ]
 
@@ -39,37 +39,37 @@ export function getLevelInfo(xp) {
 
 export const BADGE_DEFINITIONS = [
   {
-    id: 'seo_architect',
-    name: 'SEO Architect',
-    description: 'Completed Level 2 — The Mechanics',
-    icon: '🏗️',
-    condition: (s) => [3,4,5,6].every(id => s.completedModules.includes(id)),
+    id: 'claude_native',
+    name: 'Claude Native',
+    description: 'Completed Level 1 — Foundations',
+    icon: '🧠',
+    condition: (s) => [1,2,3].every(id => s.completedModules.includes(id)),
   },
   {
-    id: 'citation_champion',
-    name: 'Citation Champion',
+    id: 'power_user',
+    name: 'Power User',
+    description: 'Completed Level 2 — Working Effectively',
+    icon: '⚡',
+    condition: (s) => [4,5,6,7].every(id => s.completedModules.includes(id)),
+  },
+  {
+    id: 'harness_builder',
+    name: 'Harness Builder',
+    description: 'Completed Level 3 — Agent Harnesses',
+    icon: '🏗️',
+    condition: (s) => [8,9,10].every(id => s.completedModules.includes(id)),
+  },
+  {
+    id: 'agent_architect',
+    name: 'Agent Architect',
     description: 'Completed Level 3 with 80%+ quiz scores',
     icon: '🏆',
-    condition: (s) => [7,8,9,10].every(id => s.completedModules.includes(id)) &&
-      [7,8,9,10].every(id => (s.quizScores[id] || 0) >= 80),
+    condition: (s) => [8,9,10].every(id => s.completedModules.includes(id)) &&
+      [8,9,10].every(id => (s.quizScores[id] || 0) >= 80),
   },
   {
-    id: 'trust_builder',
-    name: 'Trust Builder',
-    description: 'Completed all Level 3 strategy modules',
-    icon: '🤝',
-    condition: (s) => [7,8,9,10].every(id => s.completedModules.includes(id)),
-  },
-  {
-    id: 'agent_whisperer',
-    name: 'Agent Whisperer',
-    description: 'Completed the Agentic Commerce module',
-    icon: '🤖',
-    condition: (s) => s.completedModules.includes(11),
-  },
-  {
-    id: 'full_stack_xeo',
-    name: 'Full Stack AISV',
+    id: 'full_stack_cm',
+    name: 'Full Stack Claude',
     description: 'Completed all 13 modules',
     icon: '⭐',
     condition: (s) => Array.from({length: 13}, (_, i) => i+1).every(id => s.completedModules.includes(id)),

@@ -1,137 +1,140 @@
-// Jasper Moment content for each module
-// Each module ends with a "Jasper Moment" slide showing current capabilities
+// Claude Moment content for each module
+// Each module ends with a "Try It" moment linking to relevant Claude tools and docs
 
 export const JASPER_MOMENTS = {
   1: {
-    concept: 'Understanding the AI search shift and why marketers must adapt',
+    concept: 'Understanding the Claude ecosystem: Claude.ai, Claude Code, and the API',
     today: [
-      { feature: 'Research Agent', detail: 'Jasper\'s Research Agent scours the web to deliver competitive landscapes, AI search trend analysis, and detailed audience profiles, structured intelligence that feeds directly into your content strategy.' },
-      { feature: 'Optimization Agent', detail: 'Jasper\'s Optimization Agent is your AI-powered SEO strategist, it analyzes existing content, creates SEO briefs, and refreshes underperforming posts, with live keyword and competitive data via SEMrush integration (any SEMrush plan works).' },
-      { feature: 'SEO/AEO/GEO Rewriter', detail: 'Paste in any existing content plus a primary keyword and Jasper instantly rewrites it for AEO, GEO, and SEO, answer-first structure, question-based headings, FAQ sections, and optimal paragraph length in one pass. No SEMrush required.' },
-      { feature: 'Jasper Analytics (2026 State of Marketing Report)', detail: 'Jasper\'s own research shows only 41% of marketers can prove AI ROI, down from 49% in 2025. Jasper is built to close that gap.' },
+      { feature: 'Claude.ai', detail: 'Start a conversation with Claude at claude.ai. Try creating a Project with custom instructions to see how context shapes Claude\'s responses.' },
+      { feature: 'Claude Code', detail: 'Install Claude Code via your terminal: npm install -g @anthropic-ai/claude-code. Open a project and try asking it to explain a complex file.' },
+      { feature: 'API Console', detail: 'Visit console.anthropic.com to get an API key. The Workbench lets you experiment with prompts and model settings without writing code.' },
     ],
-    ctaLabel: 'Try it in Jasper →',
-    ctaUrl: 'https://www.jasper.ai',
+    ctaLabel: 'Start with Claude.ai →',
+    ctaUrl: 'https://claude.ai',
   },
 
   2: {
-    concept: 'The three disciplines: SEO, AEO, and GEO, simultaneous practices',
+    concept: 'Claude.ai deep dive: Projects, artifacts, and co-work mode',
     today: [
-      { feature: 'Jasper IQ', detail: 'Jasper\'s knowledge layer maintains your company\'s positioning, products, and messaging, ensuring every piece of content reinforces the same entity signals across SEO, AEO, and GEO.' },
-      { feature: 'Content Campaigns', detail: 'Jasper generates content across all three disciplines simultaneously, blog posts for SEO, FAQ content for AEO, thought leadership for GEO, in one workflow.' },
+      { feature: 'Create a Project', detail: 'In Claude.ai, create a new Project. Add custom instructions like "You are a senior engineer at Nexus. Be direct, use code examples, cite best practices." See how it changes every response.' },
+      { feature: 'Artifacts', detail: 'Ask Claude to generate a React component or write a technical design doc. It will create an Artifact you can iterate on in-place, like a collaborative editor.' },
+      { feature: 'Co-work Mode', detail: 'Use co-work to let Claude work on artifacts autonomously while you continue the conversation. Great for longer writing or code generation tasks.' },
     ],
-    ctaLabel: 'Try it in Jasper →',
-    ctaUrl: 'https://www.jasper.ai',
+    ctaLabel: 'Try Projects in Claude.ai →',
+    ctaUrl: 'https://claude.ai',
   },
 
   3: {
-    concept: 'How AI engines work: RAG, parametric knowledge, platform-specific behaviors',
+    concept: 'Claude Code: your AI pair programmer in the terminal',
     today: [
-      { feature: 'Content Freshness Workflows', detail: 'Jasper\'s Content Pipelines support content refresh workflows that your team triggers manually, directly addressing the 40-60% monthly citation drift that makes freshness a continuous requirement. Your team controls what gets refreshed and when.' },
+      { feature: 'First Session', detail: 'Open your terminal in a project folder and run `claude`. Try: "Explain the architecture of this project" to see how it reads your codebase.' },
+      { feature: 'CLAUDE.md', detail: 'Create a CLAUDE.md file in your repo root. Add project conventions, architecture notes, and preferred patterns. Claude Code reads this automatically.' },
+      { feature: 'Multi-file Editing', detail: 'Ask Claude Code to implement a feature that touches multiple files. Watch how it plans, executes, and shows you diffs for approval.' },
     ],
+    ctaLabel: 'Install Claude Code →',
+    ctaUrl: 'https://docs.anthropic.com/en/docs/claude-code/overview',
   },
 
   4: {
-    concept: 'SEO as the foundation, technical requirements, AI crawler access, E-E-A-T',
+    concept: 'Context mastery: tokens, attention, and managing what Claude knows',
     today: [
-      { feature: 'Optimization Agent', detail: 'Jasper\'s Optimization Agent acts as an AI SEO strategist, analyzing content for E-E-A-T gaps, weak heading structure, and thin content, then generating refreshed briefs and optimized assets using live SEMrush keyword and competitive data.' },
-      { feature: 'E-E-A-T Content Templates', detail: 'Jasper\'s templates enforce author attribution, expertise signals, and source transparency, the E-E-A-T signals that AI systems require as explicit, machine-readable cues.' },
-      { feature: 'Blog & Long-form Templates', detail: 'Jasper\'s structured templates naturally produce content with proper heading hierarchy, internal linking opportunities, and semantic depth, all core SEO signals.' },
+      { feature: 'CLAUDE.md Best Practices', detail: 'Write a CLAUDE.md for one of your projects. Include: tech stack, naming conventions, testing approach, and common patterns. Compare Claude Code\'s output with and without it.' },
+      { feature: 'System Prompts', detail: 'In the API Workbench, experiment with system prompts. Try adding role context, constraints, and output format requirements. Measure how it changes response quality.' },
     ],
-    ctaLabel: 'Try it in Jasper →',
-    ctaUrl: 'https://www.jasper.ai',
+    ctaLabel: 'Read CLAUDE.md docs →',
+    ctaUrl: 'https://docs.anthropic.com/en/docs/claude-code/memory',
   },
 
   5: {
-    concept: 'Answer-first content structure, FAQ sections, 40-60 word paragraphs, citation-optimized formatting',
+    concept: 'Prompt engineering patterns that work with Claude',
     today: [
-      { feature: 'SEO/AEO/GEO Rewriter', detail: 'Jasper\'s dedicated Rewriter App takes any existing page or post, add a primary keyword, and instantly restructures the whole piece, answer-first opening, question-based headings, 40-60 word paragraphs, FAQ section. Fast single-asset optimization, no SEMrush required.' },
-      { feature: 'Brand Voice', detail: 'Jasper\'s Brand Voice ensures consistent terminology and phrasing across all content, reinforcing entity signals that help AI systems associate content with your brand as a distinct, well-defined entity.' },
-      { feature: 'Blog Post Template', detail: 'Jasper\'s blog templates structure content with direct answers at the top of each section, question-based headings, and a built-in FAQ block that outputs schema-ready Q&A pairs.' },
+      { feature: 'Structured Output', detail: 'Try asking Claude for JSON output with a specific schema. Use the API\'s tool_use feature to enforce structured responses reliably.' },
+      { feature: 'Chain of Thought', detail: 'Compare results with and without "Think step by step" in your prompts. Try extended thinking for complex reasoning tasks.' },
+      { feature: 'Prefilling', detail: 'In the API, try prefilling the assistant response with the beginning of a JSON object or code block to guide output format.' },
     ],
-    ctaLabel: 'Try it in Jasper →',
-    ctaUrl: 'https://www.jasper.ai',
+    ctaLabel: 'Explore the Prompt Engineering guide →',
+    ctaUrl: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview',
   },
 
   6: {
-    concept: 'Platform-specific optimization: different rules for ChatGPT, Perplexity, Google AI Overviews, Claude',
+    concept: 'MCP, tools, and making Claude work with your systems',
     today: [
-      { feature: 'Multi-Platform Content Repurposing', detail: 'Jasper can take a single piece of content and generate platform-optimized variants, a LinkedIn post for ChatGPT/training data influence, a structured FAQ for Perplexity\'s RAG engine, a schema-annotated web page for Google AI Overviews.' },
-      { feature: 'Content Campaigns', detail: 'Jasper\'s campaign workflows enable "Create Once, Distribute Everywhere", generating content in formats optimized for each platform\'s citation preferences from a single source brief.' },
+      { feature: 'MCP Servers', detail: 'Browse the MCP server directory and install one: filesystem, GitHub, or database. See how Claude Code gains new capabilities when connected to external data.' },
+      { feature: 'Custom Commands', detail: 'Create a /commands directory in your project with markdown files. Claude Code will pick them up as custom slash commands you can invoke.' },
     ],
-    ctaLabel: 'Try it in Jasper →',
-    ctaUrl: 'https://www.jasper.ai',
+    ctaLabel: 'Browse MCP servers →',
+    ctaUrl: 'https://github.com/modelcontextprotocol/servers',
   },
 
   7: {
-    concept: 'The earned media inversion, third-party sources carry more weight than owned content in AI citations',
+    concept: 'Repeatable workflows and automation with Claude',
     today: [
-      { feature: 'PR & Thought Leadership Templates', detail: 'Jasper generates press releases, byline articles, analyst briefing content, and guest post drafts, all the formats that build third-party coverage and earned citations.' },
-      { feature: 'LinkedIn Thought Leadership', detail: 'Jasper\'s LinkedIn post template is specifically designed for subject matter expertise content, the type that gets picked up as training data and cited in ChatGPT responses.' },
+      { feature: 'Git Integration', detail: 'Try using Claude Code for your full git workflow: ask it to stage changes, write commit messages, and explain diffs. Set up pre-commit hooks that leverage Claude.' },
+      { feature: 'Claude.ai as a Knowledge Base', detail: 'Set up a Claude.ai Project for each major system at Nexus. Upload architecture docs, API specs, and runbooks. The project becomes the team\'s always-available domain expert.' },
     ],
-    ctaLabel: 'Try it in Jasper →',
-    ctaUrl: 'https://www.jasper.ai',
+    ctaLabel: 'See Claude Code workflows →',
+    ctaUrl: 'https://docs.anthropic.com/en/docs/claude-code/overview',
   },
 
   8: {
-    concept: 'Entity optimization and schema markup, helping AI systems recognize your brand as a distinct entity',
+    concept: 'Agent architecture: the plan-act-observe loop and tool use',
     today: [
-      { feature: 'Consistent Brand Entity Signals', detail: 'Jasper IQ maintains your brand\'s consistent name, description, product names, and positioning, ensuring all content reinforces the same entity signals that AI systems use to identify and trust your brand.' },
+      { feature: 'API Tool Use', detail: 'In the API Workbench, define a simple tool (like a calculator or weather lookup). Send a message that requires the tool and observe how Claude decides to use it.' },
+      { feature: 'Extended Thinking', detail: 'Enable extended thinking on a complex reasoning task. Read Claude\'s thinking process to understand how it plans multi-step tool use.' },
     ],
+    ctaLabel: 'Read the tool use docs →',
+    ctaUrl: 'https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview',
   },
 
   9: {
-    concept: 'Measuring AI visibility, the dark funnel, and proxy metrics for Share of Model',
-    resource: {
-      title: '2026 State of AI Marketing Report',
-      detail: 'Jasper\'s own research surfaces industry-wide benchmark data on AI marketing ROI, helping teams contextualise their own measurement gaps.',
-      url: 'https://www.jasper.ai/state-of-ai-marketing-2026',
-    },
+    concept: 'Building your first agent harness with the Claude API',
+    today: [
+      { feature: 'Messages API', detail: 'Write a simple Node.js script that calls the Claude API. Add a tool definition and implement the harness loop: send message → check for tool_use → execute tool → send result → repeat.' },
+      { feature: 'Error Handling', detail: 'Implement retry logic with exponential backoff. Test what happens when you send malformed tool results back to Claude. Build a robust harness from the start.' },
+    ],
+    ctaLabel: 'See the API quickstart →',
+    ctaUrl: 'https://docs.anthropic.com/en/docs/quickstart',
   },
 
   10: {
-    concept: 'Third-party content distribution, Reddit, LinkedIn, YouTube, Wikipedia, G2, analyst relations',
+    concept: 'Research agents: search, synthesize, report',
     today: [
-      { feature: 'Multi-Channel Content Generation', detail: 'Jasper generates content natively formatted for Reddit (community discussion style), LinkedIn (thought leadership), YouTube (script and description), and review sites, all from a single content brief.' },
-      { feature: 'Content Repurposing Pipeline', detail: 'Jasper\'s repurpose feature converts a single blog post into 8+ distribution formats, enabling the multi-platform presence that increases AI citation likelihood by 2.8×.' },
-      { feature: 'Jasper Grid', detail: 'Jasper Grid\'s multi-channel campaign workflow automatically adapts one core piece of content across audiences, channels, and markets at scale, enabling the systematic third-party presence that compounds AI citation likelihood over time.' },
+      { feature: 'This Course\'s Own Sweep', detail: 'This course runs a weekly content sweep agent that uses Exa.ai for search and Claude for synthesis. Check the scripts/content-sweep.mjs file in the GitHub repo to see a production example.' },
+      { feature: 'Exa.ai Integration', detail: 'Sign up for Exa.ai and try the search API. It returns structured results with highlights and summaries, perfect for feeding into Claude for synthesis.' },
     ],
-    ctaLabel: 'Try it in Jasper →',
-    ctaUrl: 'https://www.jasper.ai',
+    ctaLabel: 'See the content sweep source →',
+    ctaUrl: 'https://github.com/splashjumanji/claude-mastery-academy/blob/main/scripts/content-sweep.mjs',
   },
 
   11: {
-    concept: 'Agentic commerce, AI agents making autonomous purchasing decisions, Agent Engine Optimization',
+    concept: 'Multi-agent systems: orchestrating multiple Claude instances',
     today: [
-      { feature: 'Optimization Agent', detail: 'Jasper\'s Optimization Agent audits your content, generates structured briefs, and delivers live competitive intelligence via SEMrush, producing exactly the kind of authoritative, well-structured content that agentic AI systems evaluate and recommend.' },
-      { feature: 'Structured Content Pipelines', detail: 'Jasper\'s Content Pipelines generate consistent, structured product and feature content at scale, the foundation of what agentic systems need to trust and recommend a brand.' },
+      { feature: 'Fan-out Pattern', detail: 'Build a simple fan-out: one supervisor agent that decomposes a task and spawns 3 sub-agent API calls in parallel. Compare results and latency vs. a single sequential call.' },
+      { feature: 'Pipeline Pattern', detail: 'Chain two agents: one that researches a topic and produces structured notes, and another that takes those notes and writes a blog post. See how structured handoff improves quality.' },
     ],
-    ctaLabel: 'Try it in Jasper →',
-    ctaUrl: 'https://www.jasper.ai',
+    ctaLabel: 'Read about agent patterns →',
+    ctaUrl: 'https://docs.anthropic.com/en/docs/build-with-claude/agentic-tools',
   },
 
   12: {
-    concept: 'The continuous optimization loop, Monitor, Diagnose, Create, Distribute, Repeat',
+    concept: 'Evaluating agent quality: testing, benchmarking, and guardrails',
     today: [
-      { feature: 'Content Pipelines', detail: 'Jasper\'s Content Pipelines handle the Create phase of the continuous loop, generating and formatting structured content at scale. Pipelines are manually triggered, giving your team control over when and what gets published.' },
-      { feature: 'Jasper Grid', detail: 'Jasper Grid transforms the Create phase at scale, upload your keyword research and Grid systematically generates AI-native search-optimized content across your entire topic cluster. What once took weeks takes minutes.' },
-      { feature: 'Jasper IQ Refresh', detail: 'When connected to an external data source (Google Drive, SharePoint, or similar), Jasper IQ can identify and refresh outdated content, directly addressing the citation drift that makes continuous updates essential.' },
+      { feature: 'LLM-as-Judge', detail: 'Write a simple evaluation harness: run your agent on 10 test cases, then use a separate Claude call to grade each output against a rubric. Calculate pass rates and quality scores.' },
+      { feature: 'Cost Tracking', detail: 'Log input_tokens and output_tokens from every API response. Build a simple dashboard or CSV export. Know exactly what your agents cost per task.' },
     ],
-    ctaLabel: 'Try it in Jasper →',
-    ctaUrl: 'https://www.jasper.ai',
+    ctaLabel: 'Read about evaluation →',
+    ctaUrl: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview',
   },
 
   13: {
-    concept: 'Jasper as the content execution engine, the IQ layer ensures brand consistency; Content Pipelines and Grid handle scale. Monitoring and attribution are coming in 2026.',
+    concept: 'Scaling to production: deployment, monitoring, and the future of agentic AI',
     today: [
-      { feature: 'Brand IQ + Knowledge Base', detail: "Jasper's IQ layer is the brand consistency engine. Brand IQ enforces entity signals, tone, and terminology across every output; the Knowledge Base stores your product details, positioning, and competitive messaging, so every piece of AI-generated content reflects your actual source of truth." },
-      { feature: 'Jasper Grid', detail: "Generate structured content at scale, upload your keyword research and Grid systematically produces SEO articles, campaign content, and product descriptions across your full topic cluster. The freshness engine the continuous loop requires." },
-      { feature: 'Content Pipelines', detail: "Automate the Create phase: structured content generation at scale across SEO, campaign, and product content types. Pipelines are manually triggered, giving your team control over what gets created and when." },
-      { feature: 'Jasper Canvas', detail: "Plan, create, review, and collaborate on campaign assets in one workspace. Canvas is the campaign execution layer, bringing together the brief, the content, and team review in a single environment." },
-      { feature: 'Jasper Agents', detail: "Automate repeatable marketing tasks with intelligent, brand-aware agents. Where content workflows can be systematized, auditing, brief generation, refreshing underperforming assets, Agents handle the execution." },
+      { feature: 'Prompt Caching', detail: 'Enable prompt caching for your agent harness to reduce latency and cost on repeated system prompts and tool definitions. Measure the difference.' },
+      { feature: 'Batch API', detail: 'If you have high-volume offline processing, try the Batch API for 50% cost savings. Great for content generation, evaluation runs, and data processing.' },
+      { feature: 'Stay Current', detail: 'Follow anthropic.com/news and the Claude Code changelog. The ecosystem moves fast; this course\'s weekly content sweep will flag major updates automatically.' },
     ],
-    ctaLabel: 'See Jasper\'s full product →',
-    ctaUrl: 'https://www.jasper.ai',
+    ctaLabel: 'See the full API reference →',
+    ctaUrl: 'https://docs.anthropic.com/en/api/getting-started',
   },
 }
 

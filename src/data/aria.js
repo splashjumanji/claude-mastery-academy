@@ -1,29 +1,29 @@
-// Aria simulation state and report card logic
+// Nexus simulation state and report card logic
 
 export const ARIA_PROFILE = {
-  name: 'Aria',
-  tagline: 'AI-powered project management for modern teams',
-  description: 'B2B SaaS tool that uses AI to automate task assignment, predict project timelines, and enable async collaboration across remote teams.',
-  founded: '2022',
-  size: '45 employees',
-  customers: '800+ teams',
-  pricing: 'From $15/user/month',
-  category: 'Project Management Software',
+  name: 'Nexus',
+  tagline: 'Ship faster with AI-augmented engineering workflows',
+  description: 'Mid-stage startup building a developer productivity platform. 12-person engineering team, series A funded, struggling with technical debt and slow shipping velocity.',
+  founded: '2023',
+  size: '12 engineers',
+  customers: 'Internal engineering team',
+  pricing: 'N/A (internal tool)',
+  category: 'Developer Productivity',
 }
 
-// Report card states based on modules completed and aria score
+// Report card states based on modules completed and velocity score
 export function getAriaReportCard(score, completedModules) {
-  const level1Done = [1, 2].every(id => completedModules.includes(id))
-  const level2Done = [3, 4, 5, 6].every(id => completedModules.includes(id))
-  const level3Done = [7, 8, 9, 10].every(id => completedModules.includes(id))
+  const level1Done = [1, 2, 3].every(id => completedModules.includes(id))
+  const level2Done = [4, 5, 6, 7].every(id => completedModules.includes(id))
+  const level3Done = [8, 9, 10].every(id => completedModules.includes(id))
   const level4Done = [11, 12, 13].every(id => completedModules.includes(id))
 
   const platforms = {
-    chatgpt: getChatGPTState(score, completedModules),
-    perplexity: getPerplexityState(score, completedModules),
-    google_aio: getGoogleAIOState(score, completedModules),
-    gemini: getGeminiState(score, completedModules),
-    claude: getClaudeState(score, completedModules),
+    chatgpt: getClaudeAIState(score, completedModules),
+    perplexity: getClaudeCodeState(score, completedModules),
+    google_aio: getAPIHarnessState(score, completedModules),
+    gemini: getWorkflowState(score, completedModules),
+    claude: getTeamAdoptionState(score, completedModules),
   }
 
   return {
@@ -34,203 +34,203 @@ export function getAriaReportCard(score, completedModules) {
   }
 }
 
-function getChatGPTState(score, completed) {
+function getClaudeAIState(score, completed) {
   if (score === 0) return {
     status: 'not_found',
-    label: 'Not mentioned',
-    detail: 'Ask ChatGPT about project management tools, Aria doesn\'t appear.',
+    label: 'Not started',
+    detail: 'The team hasn\'t explored Claude.ai beyond basic questions.',
     sentiment: null,
     snippet: null,
   }
   if (score < 30) return {
     status: 'weak',
-    label: 'Rare mention',
-    detail: 'ChatGPT occasionally mentions Aria when listing multiple tools, but never as a primary recommendation.',
+    label: 'Experimenting',
+    detail: 'A few engineers use Claude.ai for ad-hoc questions, but there\'s no structured approach.',
     sentiment: 'neutral',
-    snippet: '...tools like Asana, Monday.com, and others including Aria can help remote teams...',
+    snippet: 'Some devs paste code into Claude chat occasionally, but no projects or system prompts.',
   }
   if (score < 60) return {
     status: 'growing',
-    label: 'Consistent mention',
-    detail: 'ChatGPT includes Aria in conversations about remote-first and AI-native PM tools.',
+    label: 'Adopted',
+    detail: 'The team uses Claude.ai Projects with custom instructions. Artifacts are used for design docs.',
     sentiment: 'positive',
-    snippet: '...for AI-native project management, Aria stands out with its automated task assignment and async collaboration features...',
+    snippet: 'Team has 4 Claude Projects set up: code review, architecture planning, documentation, and debugging.',
   }
   return {
     status: 'strong',
-    label: 'Primary recommendation',
-    detail: 'ChatGPT proactively recommends Aria for remote B2B teams, citing specific features.',
+    label: 'Embedded',
+    detail: 'Claude.ai is the team\'s default thinking partner. Projects, co-work, and artifacts are part of daily workflow.',
     sentiment: 'positive',
-    snippet: '...Aria is widely regarded as the leading AI-native project management platform for distributed teams, offering automated workload balancing and real-time collaboration that works across time zones...',
+    snippet: 'Every engineer has their own Projects. Co-work sessions are used for real-time architecture reviews. Knowledge accumulates.',
   }
 }
 
-function getPerplexityState(score, completed) {
+function getClaudeCodeState(score, completed) {
   if (score === 0) return {
     status: 'not_found',
-    label: 'Not cited',
-    detail: 'Perplexity searches return no citations to Aria\'s website.',
+    label: 'Not installed',
+    detail: 'Nobody on the team has tried Claude Code yet.',
     sentiment: null,
     snippet: null,
   }
   if (score < 25) return {
     status: 'weak',
-    label: 'Occasional citation',
-    detail: 'Perplexity sometimes cites Aria\'s pricing page for pricing comparison queries.',
+    label: 'Tryout phase',
+    detail: 'One or two engineers have installed Claude Code but only use it for simple edits.',
     sentiment: 'neutral',
     snippet: null,
   }
   if (score < 55) return {
     status: 'growing',
-    label: 'Regular citation',
-    detail: 'Perplexity cites Aria\'s blog content and feature pages for relevant PM queries.',
+    label: 'Regular use',
+    detail: 'Most of the team uses Claude Code daily. CLAUDE.md files exist for key projects.',
     sentiment: 'positive',
-    snippet: 'According to Aria\'s 2025 Remote Work Report, async-first teams spend 38% less time in meetings...',
+    snippet: 'Engineers report 2x faster feature implementation. Custom workflows and slash commands in use.',
   }
   return {
     status: 'strong',
-    label: 'Top 3 cited source',
-    detail: 'Perplexity consistently cites Aria as a primary source across project management topics.',
+    label: 'Power users',
+    detail: 'Claude Code is central to the dev workflow. Custom MCP servers, hooks, and CI integration in place.',
     sentiment: 'positive',
-    snippet: '[1] aria.io, Aria is the leading AI-native PM platform... [2] aria.io/pricing, Starting at $15/user/month... [3] aria.io/blog/remote-teams...',
+    snippet: 'Every repo has a CLAUDE.md. Pre-commit hooks run Claude for code review. MCP servers connect to internal tools.',
   }
 }
 
-function getGoogleAIOState(score, completed) {
+function getAPIHarnessState(score, completed) {
   if (score === 0) return {
     status: 'not_found',
-    label: 'Not in AI Overviews',
-    detail: 'Google\'s AI Overviews never include Aria for relevant searches.',
+    label: 'No API usage',
+    detail: 'The team hasn\'t built anything with the Claude API.',
     sentiment: null,
     snippet: null,
   }
   if (score < 35) return {
     status: 'weak',
-    label: 'Occasional inclusion',
-    detail: 'Aria appears in Google AI Overviews when users search specifically for "Aria project management".',
+    label: 'First experiments',
+    detail: 'One prototype agent exists, but it\'s fragile and not in production.',
     sentiment: 'neutral',
     snippet: null,
   }
   if (score < 65) return {
     status: 'growing',
-    label: 'Category inclusion',
-    detail: 'Aria appears in AI Overviews for "best project management software for remote teams" and similar queries.',
+    label: 'First harness deployed',
+    detail: 'The team has a working agent harness in production. Error handling and tool schemas are solid.',
     sentiment: 'positive',
-    snippet: 'Aria offers AI-powered task assignment and async collaboration tools... starting at $15/user/month.',
+    snippet: 'Research agent runs weekly content sweeps. Tool schemas are well-designed. Structured output is reliable.',
   }
   return {
     status: 'strong',
-    label: 'Featured in AI Overviews',
-    detail: 'Aria is prominently featured in Google AI Overviews across a wide range of PM queries.',
+    label: 'Production-grade',
+    detail: 'Multiple agent harnesses run reliably in production with monitoring, evaluation, and cost controls.',
     sentiment: 'positive',
-    snippet: 'Aria, Best for AI-native remote teams. Features include: automated task assignment, predictive timelines, async-first workflows. Rated 4.8/5 on G2.',
+    snippet: 'Three production agents: content sweep, code review, and customer support triage. All monitored and benchmarked.',
   }
 }
 
-function getGeminiState(score, completed) {
+function getWorkflowState(score, completed) {
   if (score === 0) return {
     status: 'not_found',
-    label: 'Not visible',
-    detail: 'Gemini app searches for project management tools don\'t surface Aria.',
+    label: 'Ad-hoc only',
+    detail: 'No repeatable AI workflows. Each engineer does their own thing.',
     sentiment: null,
     snippet: null,
   }
   if (score < 32) return {
     status: 'weak',
-    label: 'Brand mention',
-    detail: 'Aria appears in Gemini answers listing PM options, but isn\'t highlighted or recommended.',
+    label: 'Basic patterns',
+    detail: 'Some shared prompts exist in Slack, but nothing systematic.',
     sentiment: 'neutral',
     snippet: null,
   }
   if (score < 62) return {
     status: 'growing',
-    label: 'Category inclusion',
-    detail: 'Gemini includes Aria in responses about AI-native project management for remote teams.',
+    label: 'Standardized',
+    detail: 'Team has documented workflows for common tasks. CLAUDE.md conventions are shared.',
     sentiment: 'positive',
-    snippet: 'Aria offers AI-powered task assignment and async-first workflows, making it a strong option for distributed teams...',
+    snippet: 'Standard workflows for: feature implementation, bug fixes, code review, and documentation updates.',
   }
   return {
     status: 'strong',
-    label: 'Featured recommendation',
-    detail: 'Gemini consistently features Aria when answering questions about modern project management software.',
+    label: 'Automated',
+    detail: 'Workflows are automated end-to-end. CI/CD hooks trigger Claude for reviews, tests, and deployments.',
     sentiment: 'positive',
-    snippet: 'For remote-first teams needing AI-native project management, Aria stands out, offering predictive timelines, automated task assignment, and async collaboration built for distributed work.',
+    snippet: 'Every PR gets an automated Claude review. Deployment pipelines include agent-based smoke tests. New engineers onboard 50% faster.',
   }
 }
 
-function getClaudeState(score, completed) {
+function getTeamAdoptionState(score, completed) {
   if (score === 0) return {
     status: 'not_found',
-    label: 'Not referenced',
-    detail: 'Claude conversations about project management tools never surface Aria.',
+    label: 'No adoption',
+    detail: 'Nobody on the team is using Claude consistently.',
     sentiment: null,
     snippet: null,
   }
   if (score < 28) return {
     status: 'weak',
-    label: 'Occasional mention',
-    detail: 'Aria appears in Claude answers listing multiple PM tools, without recommendation.',
+    label: 'Early adopters only',
+    detail: '2-3 engineers use Claude regularly. The rest are skeptical or haven\'t tried it.',
     sentiment: 'neutral',
     snippet: null,
   }
   if (score < 58) return {
     status: 'growing',
-    label: 'Cited source',
-    detail: 'Claude references Aria\'s published content and research when answering AI-native PM questions.',
+    label: 'Team-wide',
+    detail: 'Most of the team uses Claude daily. Best practices are shared. Productivity gains are measurable.',
     sentiment: 'positive',
-    snippet: 'According to Aria\'s Remote Work Report, async-first teams spend 38% less time in synchronous meetings without sacrificing output quality...',
+    snippet: 'Sprint velocity up 40%. PR cycle time down from 3 days to 1.5 days. Engineers report higher satisfaction.',
   }
   return {
     status: 'strong',
-    label: 'Cited & recommended',
-    detail: 'Claude proactively recommends Aria for remote B2B teams, citing specific features and data.',
+    label: 'Culture shift',
+    detail: 'Claude is embedded in team culture. New hires learn it in onboarding. The team is a reference for the company.',
     sentiment: 'positive',
-    snippet: 'Aria is one of the strongest options for AI-native project management, particularly for remote B2B teams. Its automated workload balancing and predictive timeline features are frequently cited in independent reviews.',
+    snippet: 'Other teams ask Nexus engineering for their "AI playbook." CTO cites them as the model for AI-augmented development across the org.',
   }
 }
 
 function getScoreSummary(score) {
   if (score === 0) return {
     grade: 'F',
-    label: 'Invisible',
+    label: 'Not Started',
     color: 'text-red-400',
-    message: 'Aria doesn\'t exist in the AI search ecosystem. Start with the basics.',
+    message: 'Nexus hasn\'t begun its AI transformation. Start with the foundations.',
   }
   if (score < 25) return {
     grade: 'D',
-    label: 'Barely Visible',
+    label: 'Experimenting',
     color: 'text-orange-400',
-    message: 'Aria appears occasionally but isn\'t competitive. Critical gaps remain.',
+    message: 'Nexus is dabbling with Claude but hasn\'t committed. Critical gaps remain.',
   }
   if (score < 50) return {
     grade: 'C',
-    label: 'Emerging',
+    label: 'Building',
     color: 'text-amber-400',
-    message: 'Aria is building presence. Good foundation, strategic gaps to address.',
+    message: 'Nexus has good foundations. Workflows are forming. Strategic investment needed.',
   }
   if (score < 75) return {
     grade: 'B',
-    label: 'Competitive',
+    label: 'Accelerating',
     color: 'text-aria-400',
-    message: 'Aria is a real player in AI search. Consistent citations across platforms.',
+    message: 'Nexus is shipping faster with Claude embedded across workflows. Real productivity gains.',
   }
   return {
     grade: 'A',
-    label: 'Market Leader',
+    label: 'Transformed',
     color: 'text-green-400',
-    message: 'Aria dominates AI search in the PM category. Top Share of Model.',
+    message: 'Nexus is an AI-augmented engineering team. Production agents, automated workflows, measurable velocity gains.',
   }
 }
 
 export const ARIA_BASELINE_ISSUES = [
-  'robots.txt blocks GPTBot, PerplexityBot, and ClaudeBot',
-  'No schema markup on any pages',
-  'Blog content last updated 18 months ago',
-  'No author attribution on any content',
-  'No FAQ sections or structured Q&A content',
-  'No presence on G2, Capterra, or Gartner Peer Insights',
-  'No Wikipedia page or Wikidata entry',
-  'No original research or proprietary statistics published',
-  'LinkedIn thought leadership: 0 posts in last 6 months',
-  'No mentions in any analyst reports or industry publications',
+  'No CLAUDE.md files in any repository',
+  'No team-wide Claude.ai Projects or shared instructions',
+  'Engineers copy-paste code into ChatGPT with no context management',
+  'No custom MCP servers or tool integrations',
+  'No structured prompting conventions or templates',
+  'No agent harnesses or API usage in production',
+  'No evaluation framework for AI-generated code',
+  'Code review is fully manual; 3-day average PR cycle time',
+  'New engineer onboarding takes 4 weeks with no AI assistance',
+  'No documentation of AI workflows or best practices',
 ]

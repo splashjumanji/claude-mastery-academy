@@ -25,20 +25,20 @@ export function Welcome({ onComplete }) {
           className="mb-8 flex justify-center"
         >
           <div className="w-20 h-20 rounded-2xl bg-flame-600 flex items-center justify-center text-4xl font-black text-white shadow-xl glow-flame">
-            X
+            CM
           </div>
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
           <h1 className="text-4xl sm:text-5xl font-display mb-3 text-navy">
-            Welcome to <span className="text-gradient">AISV Academy</span>
+            Welcome to <span className="text-gradient">Claude Mastery</span>
           </h1>
           <p className="text-xl text-xeo-muted mb-8">
-            The AI search revolution is here. Learn to win it.
+            From first conversation to production agent harnesses, master every layer of Claude.
           </p>
         </motion.div>
 
-        {/* Aria intro card */}
+        {/* Nexus intro card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -51,16 +51,16 @@ export function Welcome({ onComplete }) {
             </div>
             <div>
               <div className="text-sm text-aria-600 font-semibold mb-1">Your mission</div>
-              <h2 className="text-lg font-bold mb-2 text-navy">You're the new CMO of Aria.</h2>
+              <h2 className="text-lg font-bold mb-2 text-navy">You're the new Head of Developer Productivity at Nexus.</h2>
               <p className="text-sm text-xeo-muted leading-relaxed">
-                Aria is a B2B SaaS startup — an AI-powered project management tool for remote teams.
-                Right now, <strong className="text-navy">Aria is completely invisible to AI search engines.</strong>{' '}
-                89% of your buyers start their research in ChatGPT, Perplexity, Google AI Overviews, Gemini, or Claude.
-                They've never heard of you.
+                Nexus is a mid-stage startup with a 12-person engineering team drowning in technical debt
+                and shipping too slowly. <strong className="text-navy">Your job: embed Claude across the entire
+                engineering workflow</strong> to turn things around; from how engineers write code to how the team
+                builds and deploys agent-powered systems.
               </p>
               <p className="text-sm text-xeo-muted mt-2 leading-relaxed">
-                Over 13 modules, you'll learn SEO, AEO, and GEO — and build Aria's AI search presence
-                from zero to market leader. Every decision you make changes Aria's Citation Score.
+                Over 13 modules, you'll master Claude.ai, Claude Code, and the Claude API, and build
+                Nexus into a team that ships 3x faster with AI. Every decision you make changes Nexus's Velocity Score.
               </p>
             </div>
           </div>
@@ -74,9 +74,9 @@ export function Welcome({ onComplete }) {
           className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8"
         >
           {[
-            { icon: '📊', level: '101', title: 'The New Landscape', desc: 'Understand what changed and why it matters' },
-            { icon: '⚙️', level: '201–301', title: 'The Mechanics', desc: 'How AI search actually works and how to win it' },
-            { icon: '🚀', level: '401', title: 'The Leading Edge', desc: "Agentic commerce and where it's heading" },
+            { icon: '🧠', level: '101', title: 'Foundations', desc: 'Understand Claude.ai, Claude Code, and when to use each' },
+            { icon: '⚙️', level: '201–301', title: 'Mastery & Harnesses', desc: 'Prompting, MCP, agent architecture, and building harnesses' },
+            { icon: '🚀', level: '401', title: 'Advanced Patterns', desc: 'Multi-agent systems, evaluation, and scaling to production' },
           ].map(item => (
             <div key={item.level} className="card p-4 text-left">
               <div className="text-2xl mb-2">{item.icon}</div>
