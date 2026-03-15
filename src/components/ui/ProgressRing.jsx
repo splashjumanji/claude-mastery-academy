@@ -9,7 +9,7 @@ export function ProgressRing({ score, size = 80, strokeWidth = 7, label = 'Citat
       <div className="relative" style={{ width: size, height: size }}>
         <svg width={size} height={size} className="-rotate-90">
           {/* Track — light gray for light mode */}
-          <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#e5e3dd" strokeWidth={strokeWidth} />
+          <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#e8dcd0" strokeWidth={strokeWidth} />
           <circle
             cx={size/2} cy={size/2} r={r}
             fill="none" stroke={color} strokeWidth={strokeWidth}
