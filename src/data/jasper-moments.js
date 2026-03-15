@@ -1,139 +1,148 @@
-// Claude Moment content for each module
-// Each module ends with a "Try It" moment linking to relevant Claude tools and docs
+// Build Step content for each module
+// Each module has a "Build" step that guides learners through building the onboard-agent project
+// These steps complement the buildStep objects in modules.js with additional context
 
 export const JASPER_MOMENTS = {
   1: {
-    concept: 'Understanding the Claude ecosystem: Claude.ai, Claude Code, and the API',
+    concept: 'Brainstorm your project with Claude.ai chat',
     today: [
-      { feature: 'Claude.ai', detail: 'Start a conversation with Claude at claude.ai. Try creating a Project with custom instructions to see how context shapes Claude\'s responses.' },
-      { feature: 'Claude Code', detail: 'Install Claude Code via your terminal: npm install -g @anthropic-ai/claude-code. Open a project and try asking it to explain a complex file.' },
-      { feature: 'API Console', detail: 'Visit console.anthropic.com to get an API key. The Workbench lets you experiment with prompts and model settings without writing code.' },
+      { feature: 'Start a Conversation', detail: 'Open claude.ai and describe the onboard-agent concept: a CLI tool that reads codebases and generates onboarding docs. Ask Claude to brainstorm features, constraints, and architecture.' },
+      { feature: 'Explore the Ecosystem', detail: 'Ask Claude: "What are the differences between Claude.ai, Claude Code, and the Claude API? Which should I use for building a CLI tool?" See how it maps the three surfaces.' },
+      { feature: 'Save Your Ideas', detail: 'By the end of the conversation, you should have a feature list, target audience, and technical approach. Save this — you will use it in the next module.' },
     ],
-    ctaLabel: 'Start with Claude.ai →',
+    ctaLabel: 'Open Claude.ai →',
     ctaUrl: 'https://claude.ai',
   },
 
   2: {
-    concept: 'Claude.ai deep dive: Projects, artifacts, and co-work mode',
+    concept: 'Draft a product spec using Projects and co-work mode',
     today: [
-      { feature: 'Create a Project', detail: 'In Claude.ai, create a new Project. Add custom instructions like "You are a senior engineer at Nexus. Be direct, use code examples, cite best practices." See how it changes every response.' },
-      { feature: 'Artifacts', detail: 'Ask Claude to generate a React component or write a technical design doc. It will create an Artifact you can iterate on in-place, like a collaborative editor.' },
-      { feature: 'Co-work Mode', detail: 'Use co-work to let Claude work on artifacts autonomously while you continue the conversation. Great for longer writing or code generation tasks.' },
+      { feature: 'Create a Project', detail: 'In Claude.ai, create a Project called "Onboard Agent". Add custom instructions: "You are helping me build a CLI tool called onboard-agent that reads codebases and generates onboarding docs for new engineers."' },
+      { feature: 'Use Co-work Mode', detail: 'Ask Claude to write a product spec as an artifact. Switch to co-work and let it draft goals, user stories, architecture, and technical requirements autonomously.' },
+      { feature: 'Iterate on the Artifact', detail: 'Review the spec artifact. Ask Claude to refine it: add architecture diagrams, clarify technical constraints, or add edge cases. Export the final version as markdown.' },
     ],
-    ctaLabel: 'Try Projects in Claude.ai →',
+    ctaLabel: 'Create a Project in Claude.ai →',
     ctaUrl: 'https://claude.ai',
   },
 
   3: {
-    concept: 'Claude Code: your AI pair programmer in the terminal',
+    concept: 'Scaffold the project in Claude Code',
     today: [
-      { feature: 'First Session', detail: 'Open your terminal in a project folder and run `claude`. Try: "Explain the architecture of this project" to see how it reads your codebase.' },
-      { feature: 'CLAUDE.md', detail: 'Create a CLAUDE.md file in your repo root. Add project conventions, architecture notes, and preferred patterns. Claude Code reads this automatically.' },
-      { feature: 'Multi-file Editing', detail: 'Ask Claude Code to implement a feature that touches multiple files. Watch how it plans, executes, and shows you diffs for approval.' },
+      { feature: 'Install Claude Code', detail: 'Run: curl -fsSL https://claude.ai/install.sh | bash (or brew install --cask claude-code on macOS).' },
+      { feature: 'Scaffold the Project', detail: 'mkdir onboard-agent && cd onboard-agent && claude — then ask Claude to initialize a Node.js CLI project with package.json, src/index.js entry point, README.md, and CLAUDE.md.' },
+      { feature: 'Your First Commit', detail: 'Review the proposed file diffs, approve them, then: git init && git add -A && git commit -m "Initial scaffold". You now have a real project.' },
     ],
     ctaLabel: 'Install Claude Code →',
     ctaUrl: 'https://docs.anthropic.com/en/docs/claude-code/overview',
   },
 
   4: {
-    concept: 'Context mastery: tokens, attention, and managing what Claude knows',
+    concept: 'Write a detailed CLAUDE.md for your project',
     today: [
-      { feature: 'CLAUDE.md Best Practices', detail: 'Write a CLAUDE.md for one of your projects. Include: tech stack, naming conventions, testing approach, and common patterns. Compare Claude Code\'s output with and without it.' },
-      { feature: 'System Prompts', detail: 'In the API Workbench, experiment with system prompts. Try adding role context, constraints, and output format requirements. Measure how it changes response quality.' },
+      { feature: 'Auto-Generate', detail: 'Run /init in Claude Code to bootstrap a CLAUDE.md. Claude reads your project and drafts one automatically.' },
+      { feature: 'Refine Conventions', detail: 'Add specific rules: ES modules, 2-space indent, no semicolons, descriptive function names. Use @imports to reference your product spec.' },
+      { feature: 'Organize Rules', detail: 'Create .claude/rules/testing.md with testing conventions: colocate tests, use vitest, prefer integration tests. Check /memory for auto-learned preferences.' },
     ],
     ctaLabel: 'Read CLAUDE.md docs →',
     ctaUrl: 'https://docs.anthropic.com/en/docs/claude-code/memory',
   },
 
   5: {
-    concept: 'Prompt engineering patterns that work with Claude',
+    concept: 'Design and implement the system prompt',
     today: [
-      { feature: 'Structured Output', detail: 'Try asking Claude for JSON output with a specific schema. Use the API\'s tool_use feature to enforce structured responses reliably.' },
-      { feature: 'Chain of Thought', detail: 'Compare results with and without "Think step by step" in your prompts. Try extended thinking for complex reasoning tasks.' },
-      { feature: 'Prefilling', detail: 'In the API, try prefilling the assistant response with the beginning of a JSON object or code block to guide output format.' },
+      { feature: 'Design in Claude.ai', detail: 'In your Onboard Agent project, design the system prompt. Ask Claude to help you iterate on tone, output structure, and constraints for the onboarding documentation agent.' },
+      { feature: 'Implement in Claude Code', detail: 'Create src/prompts.js that exports a getSystemPrompt() function. Paste the prompt you designed in Claude.ai. Add src/config.js for model selection.' },
+      { feature: 'Test Extended Thinking', detail: 'Try your prompt with extended thinking enabled. Compare the output quality on a complex codebase vs. standard mode.' },
     ],
-    ctaLabel: 'Explore the Prompt Engineering guide →',
+    ctaLabel: 'Prompt Engineering Guide →',
     ctaUrl: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview',
   },
 
   6: {
-    concept: 'MCP, tools, and making Claude work with your systems',
+    concept: 'Add MCP servers and a custom skill',
     today: [
-      { feature: 'MCP Servers', detail: 'Browse the MCP server directory and install one: filesystem, GitHub, or database. See how Claude Code gains new capabilities when connected to external data.' },
-      { feature: 'Custom Commands', detail: 'Create a /commands directory in your project with markdown files. Claude Code will pick them up as custom slash commands you can invoke.' },
+      { feature: 'Install MCP', detail: 'Run: claude mcp add filesystem -- npx -y @anthropic-ai/mcp-filesystem /path/to/repo — Claude gains filesystem access to any configured directory.' },
+      { feature: 'Create a Skill', detail: 'Build .claude/skills/analyze-repo/SKILL.md with instructions for analyzing directory trees, entry points, and dependencies. Claude auto-discovers it.' },
+      { feature: 'Build the Scanner', detail: 'Ask Claude Code to implement src/scanner.js — a module that walks a directory tree and returns structured file summaries.' },
     ],
-    ctaLabel: 'Browse MCP servers →',
+    ctaLabel: 'Browse MCP Servers →',
     ctaUrl: 'https://github.com/modelcontextprotocol/servers',
   },
 
   7: {
-    concept: 'Repeatable workflows and automation with Claude',
+    concept: 'Add automation with headless mode',
     today: [
-      { feature: 'Git Integration', detail: 'Try using Claude Code for your full git workflow: ask it to stage changes, write commit messages, and explain diffs. Set up pre-commit hooks that leverage Claude.' },
-      { feature: 'Claude.ai as a Knowledge Base', detail: 'Set up a Claude.ai Project for each major system at Nexus. Upload architecture docs, API specs, and runbooks. The project becomes the team\'s always-available domain expert.' },
+      { feature: 'Headless Script', detail: 'Create scripts/check-docs.sh that runs claude -p "Analyze src/ and list files missing JSDoc comments" --output-format json. No human interaction needed.' },
+      { feature: 'Git Hook', detail: 'Set up a pre-commit hook that runs the doc coverage check and warns if coverage drops below 80%.' },
+      { feature: 'Full Git Workflow', detail: 'Let Claude Code handle your git workflow: stage changes, write commit messages, and create the comprehensive commit for all Level 201 work.' },
     ],
-    ctaLabel: 'See Claude Code workflows →',
+    ctaLabel: 'Claude Code Workflows →',
     ctaUrl: 'https://docs.anthropic.com/en/docs/claude-code/overview',
   },
 
   8: {
-    concept: 'Agent architecture: the plan-act-observe loop and tool use',
+    concept: 'Design tool schemas for the onboard-agent',
     today: [
-      { feature: 'API Tool Use', detail: 'In the API Workbench, define a simple tool (like a calculator or weather lookup). Send a message that requires the tool and observe how Claude decides to use it.' },
-      { feature: 'Extended Thinking', detail: 'Enable extended thinking on a complex reasoning task. Read Claude\'s thinking process to understand how it plans multi-step tool use.' },
+      { feature: 'Draft in Co-work', detail: 'In your Claude.ai Project, use co-work mode to draft JSON tool schemas for: readFile, listDirectory, searchCode, and getDependencies.' },
+      { feature: 'Implement in Code', detail: 'In Claude Code, create src/tools.js (schema definitions) and src/tool-executor.js (Node.js implementations for each tool).' },
+      { feature: 'Server Tools', detail: 'Learn about server tools like web_search and web_fetch that require zero implementation — you will use these in Module 10.' },
     ],
-    ctaLabel: 'Read the tool use docs →',
+    ctaLabel: 'Tool Use Docs →',
     ctaUrl: 'https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview',
   },
 
   9: {
-    concept: 'Building your first agent harness with the Claude API',
+    concept: 'Implement the full agent loop',
     today: [
-      { feature: 'Messages API', detail: 'Write a simple Node.js script that calls the Claude API. Add a tool definition and implement the harness loop: send message → check for tool_use → execute tool → send result → repeat.' },
-      { feature: 'Error Handling', detail: 'Implement retry logic with exponential backoff. Test what happens when you send malformed tool results back to Claude. Build a robust harness from the start.' },
+      { feature: 'The Agent Loop', detail: 'Build src/agent.js: send system prompt + tools → check for tool_use blocks → execute tools → send results back → repeat until done. Include a 20-iteration safety limit.' },
+      { feature: 'Error Handling', detail: 'Add exponential backoff for rate limits, clear error messages for tool failures, and a cost tracker for input/output tokens.' },
+      { feature: 'Test It Live', detail: 'Create a test script and run it on your own project. The agent should autonomously explore your codebase and generate onboarding documentation.' },
     ],
-    ctaLabel: 'See the API quickstart →',
+    ctaLabel: 'API Quickstart →',
     ctaUrl: 'https://docs.anthropic.com/en/docs/quickstart',
   },
 
   10: {
-    concept: 'Research agents: search, synthesize, report',
+    concept: 'Add web search and agent memory',
     today: [
-      { feature: 'This Course\'s Own Sweep', detail: 'This course runs a weekly content sweep agent that uses Exa.ai for search and Claude for synthesis. Check the scripts/content-sweep.mjs file in the GitHub repo to see a production example.' },
-      { feature: 'Exa.ai Integration', detail: 'Sign up for Exa.ai and try the search API. It returns structured results with highlights and summaries, perfect for feeding into Claude for synthesis.' },
+      { feature: 'Web Search', detail: 'Add a searchDocs tool using the web_search server tool. The agent enriches onboarding docs with links to official framework documentation.' },
+      { feature: 'Agent Memory', detail: 'Create src/memory.js that saves previous runs to .onboard-agent/memory.json. On repeat runs, only re-analyze changed files (using git diff).' },
+      { feature: 'Cross-Repo Testing', detail: 'Test the full agent on a different local repo. It should work on any codebase, not just onboard-agent.' },
     ],
-    ctaLabel: 'See the content sweep source →',
+    ctaLabel: 'Content Sweep Source →',
     ctaUrl: 'https://github.com/splashjumanji/claude-mastery-academy/blob/main/scripts/content-sweep.mjs',
   },
 
   11: {
-    concept: 'Multi-agent systems: orchestrating multiple Claude instances',
+    concept: 'Add parallel sub-agents for faster analysis',
     today: [
-      { feature: 'Fan-out Pattern', detail: 'Build a simple fan-out: one supervisor agent that decomposes a task and spawns 3 sub-agent API calls in parallel. Compare results and latency vs. a single sequential call.' },
-      { feature: 'Pipeline Pattern', detail: 'Chain two agents: one that researches a topic and produces structured notes, and another that takes those notes and writes a blog post. See how structured handoff improves quality.' },
+      { feature: 'Fan-Out Pattern', detail: 'Refactor to use 3 parallel sub-agents: ArchitectureAgent, DependencyAgent, SetupAgent. A Synthesizer combines their outputs.' },
+      { feature: 'Measure Speedup', detail: 'Add timing logs. The parallel version should be 2-3x faster than sequential. Compare total API costs.' },
+      { feature: 'Custom Agent', detail: 'Create a custom sub-agent at .claude/agents/doc-reviewer.md that reviews generated documentation for accuracy.' },
     ],
-    ctaLabel: 'Read about agent patterns →',
+    ctaLabel: 'Agent Patterns →',
     ctaUrl: 'https://docs.anthropic.com/en/docs/build-with-claude/agentic-tools',
   },
 
   12: {
-    concept: 'Evaluating agent quality: testing, benchmarking, and guardrails',
+    concept: 'Build an eval suite with LLM-as-judge',
     today: [
-      { feature: 'LLM-as-Judge', detail: 'Write a simple evaluation harness: run your agent on 10 test cases, then use a separate Claude call to grade each output against a rubric. Calculate pass rates and quality scores.' },
-      { feature: 'Cost Tracking', detail: 'Log input_tokens and output_tokens from every API response. Build a simple dashboard or CSV export. Know exactly what your agents cost per task.' },
+      { feature: 'Grading Rubric', detail: 'In Claude.ai co-work, draft a rubric scoring: completeness, accuracy, structure, actionability, and conciseness (1-5 each).' },
+      { feature: 'Eval Harness', detail: 'Build test/eval.js: run the agent on 5 test repos, grade each output with Claude against the rubric, print a summary table.' },
+      { feature: 'Iterate on Quality', detail: 'Use eval results to improve your system prompt. Re-run evals to verify improvements. Treat prompts like code.' },
     ],
-    ctaLabel: 'Read about evaluation →',
+    ctaLabel: 'Evaluation Best Practices →',
     ctaUrl: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview',
   },
 
   13: {
-    concept: 'Scaling to production: deployment, monitoring, and the future of agentic AI',
+    concept: 'Ship to production — caching, publishing, and the road ahead',
     today: [
-      { feature: 'Prompt Caching', detail: 'Enable prompt caching for your agent harness to reduce latency and cost on repeated system prompts and tool definitions. Measure the difference.' },
-      { feature: 'Batch API', detail: 'If you have high-volume offline processing, try the Batch API for 50% cost savings. Great for content generation, evaluation runs, and data processing.' },
-      { feature: 'Stay Current', detail: 'Follow anthropic.com/news and the Claude Code changelog. The ecosystem moves fast; this course\'s weekly content sweep will flag major updates automatically.' },
+      { feature: 'Prompt Caching', detail: 'Add cache_control: {"type": "ephemeral"} to system prompts and tools. Log cache_read_input_tokens to measure ~90% cost savings.' },
+      { feature: 'Cost Report', detail: 'After each run, print: total tokens, cached tokens, estimated USD cost, and duration. Know exactly what the agent costs.' },
+      { feature: 'Publish', detail: 'Polish package.json, README.md, and tag v1.0.0. Optionally publish to npm or push to GitHub. Your onboard-agent is complete.' },
     ],
-    ctaLabel: 'See the full API reference →',
+    ctaLabel: 'Full API Reference →',
     ctaUrl: 'https://docs.anthropic.com/en/api/getting-started',
   },
 }

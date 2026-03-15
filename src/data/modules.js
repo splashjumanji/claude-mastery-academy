@@ -71,11 +71,23 @@ export const MODULES = {
       },
       {
         id: 'l1_5',
-        heading: 'Where does Nexus start?',
-        body: 'For Nexus, the journey starts with two parallel tracks: getting the team comfortable with Claude.ai for thinking and planning, and getting engineers set up with Claude Code for daily development. The API layer comes later, once you understand what to build.',
+        heading: 'Your project starts here.',
+        body: 'Throughout this course, you will build a real tool: an "onboard-agent" — a CLI that reads any codebase and generates onboarding documentation for new engineers. You will plan it in Claude.ai, spec it in co-work mode, and build it in Claude Code. By the end, you will have a deployed, working agent. The first step? Open Claude.ai and start thinking.',
         type: 'narrative',
       },
     ],
+    buildStep: {
+      surface: 'chat',
+      surfaceLabel: 'Claude.ai Chat',
+      title: 'Brainstorm the onboard-agent',
+      instructions: [
+        'Open claude.ai and start a new conversation.',
+        'Send this prompt: "I want to build a CLI tool called onboard-agent that reads a codebase and generates onboarding documentation for new engineers. Help me think through: what should it do, who is it for, what are the key features, and what are the constraints?"',
+        'Have a back-and-forth conversation. Ask Claude to refine the feature list and suggest a tech stack.',
+        'Save the conversation — you will use these ideas in the next module.',
+      ],
+      expectedOutput: 'A clear feature list, target audience, and technical approach for your onboard-agent, developed through conversation with Claude.',
+    },
     quiz: {
       xpBonus: 25,
       questions: [
@@ -212,6 +224,19 @@ export const MODULES = {
         },
       ],
     },
+    buildStep: {
+      surface: 'cowork',
+      surfaceLabel: 'Claude.ai Co-work',
+      title: 'Draft the onboard-agent spec',
+      instructions: [
+        'In Claude.ai, create a new Project called "Onboard Agent". Add a custom instruction: "You are helping me build a CLI tool called onboard-agent that reads codebases and generates onboarding docs."',
+        'Start a conversation in the project. Ask Claude to write a product spec artifact with: goals, user stories, technical requirements, and a simple architecture diagram.',
+        'Switch to co-work mode: tell Claude to "Write a detailed product spec for onboard-agent as an artifact" and let it work autonomously.',
+        'Review the artifact. Ask for refinements: "Add an architecture section showing how the CLI, file reader, and Claude API interact."',
+        'Export the spec as markdown — you will use it as a reference throughout the build.',
+      ],
+      expectedOutput: 'A product spec artifact in your Claude.ai Project with goals, user stories, architecture, and technical requirements for onboard-agent.',
+    },
   },
 
   3: {
@@ -266,11 +291,25 @@ export const MODULES = {
       },
       {
         id: 'l3_4',
-        heading: 'At Nexus, day one looks like this.',
-        body: 'You install Claude Code on the main monorepo. You create a CLAUDE.md with the tech stack (React 18, Express, Postgres, Jest) and team conventions (no abbreviations in variable names, all API routes go through middleware, tests are colocated). Then you ask: "Explain the authentication flow in this codebase." Claude reads 14 files and gives you a clear walkthrough. Your first PR that afternoon takes 20 minutes instead of 3 hours.',
+        heading: 'Time to build.',
+        body: 'You have planned the onboard-agent in Claude.ai chat and specced it in co-work mode. Now it is time to scaffold the project in Claude Code. This is the moment the project goes from ideas to code.',
         type: 'narrative',
       },
     ],
+    buildStep: {
+      surface: 'code',
+      surfaceLabel: 'Claude Code',
+      title: 'Scaffold the onboard-agent project',
+      instructions: [
+        'Install Claude Code if you haven\'t: curl -fsSL https://claude.ai/install.sh | bash',
+        'Create and enter your project: mkdir onboard-agent && cd onboard-agent',
+        'Start Claude Code: claude',
+        'Tell Claude: "Initialize a Node.js CLI project called onboard-agent. Create package.json with a bin entry, a src/index.js entry point that accepts a directory path argument, and a README.md. Also create a CLAUDE.md with the project\'s purpose and conventions."',
+        'Review the diffs Claude proposes and approve them.',
+        'Run: git init && git add -A && git commit -m "Initial scaffold"',
+      ],
+      expectedOutput: 'A git repo with package.json (bin entry), src/index.js (CLI entry point), README.md, and CLAUDE.md. Running `node src/index.js ./` should print a placeholder message.',
+    },
     quiz: {
       xpBonus: 25,
       questions: [
@@ -395,6 +434,19 @@ export const MODULES = {
         },
       ],
     },
+    buildStep: {
+      surface: 'code',
+      surfaceLabel: 'Claude Code',
+      title: 'Write a real CLAUDE.md for onboard-agent',
+      instructions: [
+        'Open Claude Code in your onboard-agent project: cd onboard-agent && claude',
+        'Run /init to let Claude auto-generate a starter CLAUDE.md by reading your project.',
+        'Review the generated file, then ask Claude to refine it: "Update CLAUDE.md to include these conventions: use ES modules, 2-space indent, no semicolons, descriptive function names. Add @imports for the product spec we drafted."',
+        'Create a rules directory: ask Claude to "Create .claude/rules/testing.md with our testing conventions: colocate test files, use vitest, prefer integration tests over unit tests."',
+        'Run /memory to check if Claude has learned anything from your corrections so far.',
+      ],
+      expectedOutput: 'A detailed CLAUDE.md with tech stack, conventions, and @imports. A .claude/rules/testing.md file. Claude\'s auto-memory reflecting your preferences.',
+    },
   },
 
   5: {
@@ -502,6 +554,19 @@ export const MODULES = {
         },
       ],
     },
+    buildStep: {
+      surface: 'chat',
+      surfaceLabel: 'Claude.ai Chat + Claude Code',
+      title: 'Design and implement the system prompt',
+      instructions: [
+        'In Claude.ai (within your "Onboard Agent" project), start a new conversation: "I need to design a system prompt for my onboard-agent. It should instruct Claude to act as a senior engineer who reads codebases and writes clear, structured onboarding documentation. Help me iterate on this."',
+        'Work with Claude.ai to refine the prompt: what tone? What sections should the output include? What should it NOT do?',
+        'Once you are happy with the system prompt, switch to Claude Code.',
+        'In Claude Code, tell it: "Create src/prompts.js that exports a getSystemPrompt() function returning the system prompt for our onboarding agent." Paste the prompt you designed.',
+        'Ask Claude Code to also create src/config.js with model selection (default: sonnet, flag for opus on complex repos).',
+      ],
+      expectedOutput: 'A polished system prompt designed in Claude.ai chat, implemented as src/prompts.js in the project. A src/config.js with model configuration.',
+    },
   },
 
   6: {
@@ -587,6 +652,19 @@ export const MODULES = {
           explanation: 'Skills are folders in .claude/skills/ containing a SKILL.md file with YAML frontmatter (name, description) and instructions. Claude auto-discovers them and uses them when relevant. They can include templates, scripts, and examples alongside the SKILL.md.',
         },
       ],
+    },
+    buildStep: {
+      surface: 'code',
+      surfaceLabel: 'Claude Code',
+      title: 'Add MCP and a custom skill',
+      instructions: [
+        'In Claude Code, install the filesystem MCP server: claude mcp add filesystem -- npx -y @anthropic-ai/mcp-filesystem /path/to/test/repo',
+        'Test it: ask Claude Code to "Use the filesystem MCP server to list all JavaScript files in the test repo and count lines of code."',
+        'Create a custom skill: tell Claude to "Create a skill at .claude/skills/analyze-repo/SKILL.md that instructs Claude to analyze a directory tree, identify entry points, list dependencies, and summarize the architecture."',
+        'Test the skill: start a new Claude Code session and ask it to analyze a repo — it should automatically pick up the skill.',
+        'Ask Claude Code to implement src/scanner.js — a module that walks a directory tree and returns a structured summary of files, sizes, and types.',
+      ],
+      expectedOutput: 'Filesystem MCP server connected. Custom analyze-repo skill in .claude/skills/. A working src/scanner.js that scans a directory tree.',
     },
   },
 
@@ -680,6 +758,18 @@ export const MODULES = {
           explanation: 'Headless mode runs Claude Code without human interaction, making it perfect for CI/CD integration: automated code reviews on PRs, documentation checks, test coverage analysis, and structured code quality reports.',
         },
       ],
+    },
+    buildStep: {
+      surface: 'code',
+      surfaceLabel: 'Claude Code',
+      title: 'Add automation and headless checks',
+      instructions: [
+        'In Claude Code, create a headless mode script: tell Claude to "Create scripts/check-docs.sh that runs claude -p \'Analyze src/ and list any files that are missing JSDoc comments\' --output-format json and saves the result to reports/doc-coverage.json."',
+        'Test the script: chmod +x scripts/check-docs.sh && ./scripts/check-docs.sh',
+        'Set up a git workflow: ask Claude to "Write a pre-commit Git hook that runs our doc coverage check and warns if coverage drops below 80%."',
+        'Ask Claude Code to "Create a comprehensive commit for all our Level 201 changes with a detailed commit message" — let Claude handle the git workflow.',
+      ],
+      expectedOutput: 'A headless mode script (scripts/check-docs.sh) that runs Claude without interaction. A pre-commit hook for automated doc checks. All Level 201 work committed.',
     },
   },
 
@@ -788,6 +878,18 @@ export const MODULES = {
         },
       ],
     },
+    buildStep: {
+      surface: 'cowork',
+      surfaceLabel: 'Claude.ai Co-work + Claude Code',
+      title: 'Design the onboard-agent tool schemas',
+      instructions: [
+        'In Claude.ai (within your "Onboard Agent" project), ask: "I need to define tool schemas for my onboard-agent. The agent needs tools to: read files, list directories, search for patterns in code, and get package.json dependencies. Draft the JSON tool schemas as an artifact."',
+        'Use co-work to let Claude draft all four tool schemas with names, descriptions, and input_schema fields.',
+        'Review and iterate: "Make the readFile tool accept an optional encoding parameter" or "Add a maxDepth parameter to listDirectory."',
+        'Switch to Claude Code: "Create src/tools.js that exports all four tool definitions as an array, and src/tool-executor.js that implements each tool using Node.js fs and child_process."',
+      ],
+      expectedOutput: 'Four tool schemas drafted as a co-work artifact, then implemented as src/tools.js (definitions) and src/tool-executor.js (implementations) in your project.',
+    },
   },
 
   9: {
@@ -873,6 +975,18 @@ export const MODULES = {
         },
       ],
     },
+    buildStep: {
+      surface: 'code',
+      surfaceLabel: 'Claude Code',
+      title: 'Implement the agent loop',
+      instructions: [
+        'In Claude Code, tell it: "Create src/agent.js that implements the full agent loop. It should: 1) send the system prompt + user message + tool definitions to the Claude API, 2) check for tool_use blocks in the response, 3) execute each tool using tool-executor.js, 4) send results back, 5) repeat until Claude gives a final text response. Include a maxIterations limit of 20."',
+        'Ask Claude to add proper error handling: "Add exponential backoff for 429 rate limit errors, clear error messages for tool failures, and a cost tracker that logs input_tokens and output_tokens."',
+        'Test it: "Create a test script that runs the agent on our own onboard-agent project — it should read the codebase and generate onboarding docs."',
+        'Run the test: node test/run-agent.js ./ — the agent should autonomously explore your codebase and produce documentation.',
+      ],
+      expectedOutput: 'A working agent loop in src/agent.js that autonomously reads your codebase using tools, with error handling and cost tracking. Running it on the onboard-agent project itself should produce onboarding documentation.',
+    },
   },
 
   10: {
@@ -952,6 +1066,18 @@ export const MODULES = {
         },
       ],
     },
+    buildStep: {
+      surface: 'code',
+      surfaceLabel: 'Claude Code',
+      title: 'Add web search for framework docs',
+      instructions: [
+        'In Claude Code: "Add a new tool called searchDocs that uses the web_search server tool to find official documentation for any framework the agent encounters in the codebase. For example, if it sees React imports, it should be able to search for relevant React docs."',
+        'Tell Claude: "Update src/agent.js to add a second pass: after generating the initial onboarding doc, the agent searches for official docs for each major dependency and adds a Resources section with links."',
+        'Add agent memory: "Create src/memory.js that saves previous runs to .onboard-agent/memory.json. On subsequent runs, it should skip files it has already analyzed and only re-analyze changed files (use git diff)."',
+        'Test the full flow on a different repo you have locally.',
+      ],
+      expectedOutput: 'Web search integrated for enriching docs with framework links. Agent memory prevents redundant analysis on repeat runs. Working end-to-end on real codebases.',
+    },
   },
 
   // ── LEVEL 4: ADVANCED PATTERNS ──────────────────────────────
@@ -1015,6 +1141,18 @@ export const MODULES = {
           explanation: 'The fan-out pattern uses a supervisor agent to decompose a complex task, then delegates sub-tasks to specialized worker agents that run in parallel. The supervisor collects and synthesizes their outputs into a final result.',
         },
       ],
+    },
+    buildStep: {
+      surface: 'code',
+      surfaceLabel: 'Claude Code',
+      title: 'Add sub-agents for parallel analysis',
+      instructions: [
+        'In Claude Code: "Refactor the agent to use a fan-out pattern. Create three specialized sub-agent prompts: 1) ArchitectureAgent that maps the directory structure and entry points, 2) DependencyAgent that analyzes package.json and import graphs, 3) SetupAgent that identifies build commands, env variables, and getting-started steps."',
+        'Tell Claude: "Update src/agent.js to run all three sub-agents concurrently using Promise.all, then pass all their outputs to a Synthesizer agent that combines them into the final onboarding document."',
+        'Test parallel execution: "Add timing logs to compare sequential vs parallel. The parallel version should be 2-3x faster."',
+        'Create a custom sub-agent: ask Claude to "Create a sub-agent definition at .claude/agents/doc-reviewer.md that reviews generated documentation for accuracy and completeness."',
+      ],
+      expectedOutput: 'Three parallel sub-agents (architecture, dependencies, setup) with a synthesizer. Measurably faster than sequential. Custom doc-reviewer agent definition.',
     },
   },
 
@@ -1095,6 +1233,18 @@ export const MODULES = {
           explanation: 'System prompts directly control agent behavior. A small change can dramatically affect outputs (for better or worse). Version-controlling prompts and running evals on every change prevents regressions, just like running tests on code changes.',
         },
       ],
+    },
+    buildStep: {
+      surface: 'cowork',
+      surfaceLabel: 'Claude.ai Co-work + Claude Code',
+      title: 'Build an eval suite',
+      instructions: [
+        'In Claude.ai co-work mode: "Create a grading rubric artifact for evaluating onboard-agent output quality. Score on: completeness (covers all key files), accuracy (correct descriptions), structure (clear sections and hierarchy), actionability (new engineer can follow it), and conciseness (no filler)."',
+        'In Claude Code: "Create test/eval.js that: 1) runs the agent on 5 test repos (you can use public GitHub repos or create small test fixtures), 2) sends each output to Claude with the grading rubric, 3) collects scores (1-5 per dimension), and 4) prints a summary table with pass/fail per test case."',
+        'Run the eval: node test/eval.js — check which dimensions need improvement.',
+        'Iterate: "Based on the eval results, update the system prompt in src/prompts.js to improve the weakest scoring dimension. Then re-run evals."',
+      ],
+      expectedOutput: 'A grading rubric (co-work artifact) and eval harness (test/eval.js) using LLM-as-judge. Agent output scored on 5 dimensions across multiple test repos.',
     },
   },
 
@@ -1184,6 +1334,19 @@ export const MODULES = {
           explanation: 'Production agents need: an eval suite (20+ test cases), robust error handling, cost tracking and budget caps, guardrails (input validation, output filtering), monitoring and alerting, and version-controlled system prompts with evals on every change.',
         },
       ],
+    },
+    buildStep: {
+      surface: 'code',
+      surfaceLabel: 'Claude Code',
+      title: 'Ship it — caching, npm publish, docs',
+      instructions: [
+        'In Claude Code: "Add prompt caching to src/agent.js. Add cache_control: {type: \"ephemeral\"} to the system prompt and tool definitions so they are cached across tool loop iterations. Log cache_read_input_tokens to measure savings."',
+        'Add a cost summary: "After each run, print a report: total input tokens, output tokens, cached tokens, estimated cost in USD, and run duration."',
+        'Prepare for publishing: "Update package.json with a proper description, keywords, bin entry pointing to src/index.js, and a #!/usr/bin/env node shebang. Create a comprehensive README.md with installation, usage examples, configuration, and architecture overview."',
+        'Final commit: "Create a polished commit with all production readiness changes. Tag it as v1.0.0."',
+        'Optional: publish to npm with npm publish, or push to GitHub and share with your team.',
+      ],
+      expectedOutput: 'Prompt caching reducing costs by ~90% on repeated calls. A cost report after each run. A polished, publishable npm package with README and v1.0.0 tag. Your onboard-agent is complete.',
     },
   },
 
