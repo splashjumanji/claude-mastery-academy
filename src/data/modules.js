@@ -269,7 +269,7 @@ export const MODULES = {
         body: 'Claude Code does not just answer questions. It operates in an agentic loop: it thinks about what to do, uses tools (reading files, running commands, editing code), observes the results, and decides the next step. One prompt can trigger dozens of tool calls.',
         type: 'concept',
         keyPoints: [
-          { text: 'Plan → Act → Observe → Decide → Repeat. This is the core agent loop.' },
+          { text: 'Plan → Act → Observe → Decide → Repeat. The loop starts at Plan because the initial observation has already happened — Claude received your request. From there it plans the next action, executes it using a tool, observes the result, decides what to do next, and repeats until done.' },
           { text: 'Tools include: reading files, listing directories, running terminal commands, editing files, searching code.' },
           { text: 'Claude Code plans multi-step changes and executes them in sequence.' },
           { text: 'You can interrupt at any time. Every destructive action asks for permission.' },
