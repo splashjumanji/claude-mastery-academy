@@ -9,7 +9,6 @@ import { DragDrop } from '../interactions/DragDrop'
 import { PipelineSimulator } from '../interactions/PipelineSimulator'
 import { ContentEditor } from '../interactions/ContentEditor'
 import { DecisionTree } from '../interactions/DecisionTree'
-import { JasperMoment } from '../interactions/JasperMoment'
 import { XPToast } from '../ui/XPToast'
 
 // Placeholder for Level 3 & 4 modules not yet fully built
@@ -45,17 +44,17 @@ function ComingSoon({ module, onComplete }) {
 function getPhases(module) {
   switch (module.type) {
     case 'micro_lesson_quiz':
-      return ['lessons', 'quiz', 'jasper']
+      return ['lessons', 'quiz']
     case 'micro_lesson_matching_quiz':
-      return ['lessons', 'matching', 'quiz', 'jasper']
+      return ['lessons', 'matching', 'quiz']
     case 'pipeline_simulator_quiz':
-      return ['simulator', 'quiz', 'jasper']
+      return ['simulator', 'quiz']
     case 'micro_lesson_dragdrop_quiz':
-      return ['lessons', 'dragdrop', 'quiz', 'jasper']
+      return ['lessons', 'dragdrop', 'quiz']
     case 'content_editor':
-      return ['lessons', 'editor', 'jasper']
+      return ['lessons', 'editor']
     case 'decision_tree_quiz':
-      return ['lessons', 'decisions', 'quiz', 'jasper']
+      return ['lessons', 'decisions', 'quiz']
     default:
       return ['coming_soon']
   }
@@ -69,11 +68,10 @@ const PHASE_LABELS = {
   simulator:  { label: 'Simulate', icon: '🔬' },
   editor:     { label: 'Transform', icon: '✍️' },
   decisions:  { label: 'Decide', icon: '🗺️' },
-  jasper:     { label: 'Jasper', icon: '⚡' },
   coming_soon:{ label: 'Module', icon: '🚧' },
 }
 
-export function ModulePlayer({ onModuleComplete, updateAriaScore }) {
+export function ModulePlayer({ onModuleComplete }) {
   const { id } = useParams()
   const navigate = useNavigate()
   const module = getModuleById(Number(id))
@@ -96,15 +94,12 @@ export function ModulePlayer({ onModuleComplete, updateAriaScore }) {
   const currentPhase = phases[phaseIndex]
 
   const advancePhase = useCallback((quizScore = null) => {
-    // Award XP at the end of the final "content" phase (before jasper moment)
-    const isLastContent = phaseIndex === phases.length - 2 && phases[phases.length - 1] === 'jasper'
-    const isOnlyComing = currentPhase === 'coming_soon'
+    const isLastPhase = phaseIndex === phases.length - 1
 
-    if (currentPhase === 'jasper' || isOnlyComing) {
+    if (isLastPhase) {
       // Module complete
       if (!completed) {
         setCompleted(true)
-        if (module.ariaScoreDelta > 0) updateAriaScore(module.ariaScoreDelta)
         onModuleComplete(module.id, module.xpReward, quizScore)
         setXPToast({ visible: true, amount: module.xpReward })
       }
@@ -112,10 +107,8 @@ export function ModulePlayer({ onModuleComplete, updateAriaScore }) {
       return
     }
 
-    if (phaseIndex + 1 < phases.length) {
-      setPhaseIndex(i => i + 1)
-    }
-  }, [phaseIndex, phases, currentPhase, module, completed, onModuleComplete, updateAriaScore, navigate])
+    setPhaseIndex(i => i + 1)
+  }, [phaseIndex, phases.length, module, completed, onModuleComplete, navigate])
 
   const renderPhase = () => {
     switch (currentPhase) {
@@ -180,9 +173,6 @@ export function ModulePlayer({ onModuleComplete, updateAriaScore }) {
             onComplete={(score) => advancePhase(score)}
           />
         )
-
-      case 'jasper':
-        return <JasperMoment moduleId={module.id} onContinue={() => advancePhase()} />
 
       case 'coming_soon':
         return <ComingSoon module={module} onComplete={(score) => advancePhase(score)} />
