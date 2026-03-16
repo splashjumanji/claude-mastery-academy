@@ -81,6 +81,13 @@ export function ModulePlayer({ onModuleComplete }) {
   const [phaseIndex, setPhaseIndex] = useState(0)
   const [xpToast, setXPToast] = useState({ visible: false, amount: 0 })
   const [completed, setCompleted] = useState(false)
+  const [plainLanguage, setPlainLanguage] = useState(() => localStorage.getItem('plainLanguage') === 'true')
+
+  const togglePlainLanguage = () => setPlainLanguage(prev => {
+    const next = !prev
+    localStorage.setItem('plainLanguage', String(next))
+    return next
+  })
 
   if (!module) {
     return (
@@ -115,7 +122,7 @@ export function ModulePlayer({ onModuleComplete }) {
   const renderPhase = () => {
     switch (currentPhase) {
       case 'lessons':
-        return <ScrollStory lessons={module.lessons} onComplete={() => advancePhase()} />
+        return <ScrollStory lessons={module.lessons} onComplete={() => advancePhase()} plainLanguage={plainLanguage} />
 
       case 'quiz':
         return (
@@ -199,7 +206,22 @@ export function ModulePlayer({ onModuleComplete }) {
           </div>
           <div className="text-xs text-xeo-muted">{module.subtitle}</div>
         </div>
-        <div className="text-xs text-xeo-muted shrink-0">{module.estimatedMinutes}m</div>
+        <div className="flex items-center gap-2 shrink-0">
+          <div className="text-xs text-xeo-muted">{module.estimatedMinutes}m</div>
+          {currentPhase === 'lessons' && (
+            <button
+              onClick={togglePlainLanguage}
+              title={plainLanguage ? 'Plain English on — click to turn off' : 'Turn on plain English explanations'}
+              className={`text-xs font-semibold px-2.5 py-1 rounded-full border transition-all ${
+                plainLanguage
+                  ? 'bg-aria-100 border-aria-300 text-aria-700'
+                  : 'bg-xeo-subtle border-xeo-border text-xeo-muted hover:text-navy hover:border-navy/20'
+              }`}
+            >
+              {plainLanguage ? '📖 Plain English' : 'Plain English'}
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Phase progress */}
