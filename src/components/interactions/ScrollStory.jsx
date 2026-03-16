@@ -560,9 +560,25 @@ export function ScrollStory({ lessons, onComplete }) {
   const platformRevealIdx = useMemo(() => beats.findIndex(b => b.type === 'platform_reveal'), [beats])
   const platformCount     = platformRevealIdx >= 0 ? (beats[platformRevealIdx].platforms?.length ?? 0) : 0
 
+  const outerRef      = useRef(null)
   const containerRef  = useRef(null)
   const currentIdxRef = useRef(0)
   const completedRef  = useRef(false)
+
+  // Dynamically measure the element's top offset so the container fills exactly
+  // the remaining viewport height regardless of masthead/header size changes.
+  const [containerHeight, setContainerHeight] = useState('calc(100dvh - 380px)')
+  useEffect(() => {
+    const update = () => {
+      if (!outerRef.current) return
+      const top = outerRef.current.getBoundingClientRect().top
+      setContainerHeight(`calc(100dvh - ${Math.round(top)}px)`)
+    }
+    update()
+    const ro = new ResizeObserver(update)
+    ro.observe(document.documentElement)
+    return () => ro.disconnect()
+  }, [])
 
   const [currentBeat, setCurrentBeat] = useState(0)
   const [seenBeats, setSeenBeats]     = useState(() => new Set([0]))
@@ -858,7 +874,7 @@ export function ScrollStory({ lessons, onComplete }) {
   if (!beats.length) return null
 
   return (
-    <div className="relative" style={{ height: 'calc(100vh - 224px)' }}>
+    <div ref={outerRef} className="relative" style={{ height: containerHeight }}>
 
       {/* ── Scroll snap container ── */}
       <div ref={containerRef} className="scroll-story-container">
