@@ -9,17 +9,17 @@
 }
 
 @layer components {
-  /* Cards — white on warm-white background */
+  /* Cards — white on warm-cream background */
   .card { @apply bg-white border border-xeo-border rounded-2xl shadow-sm; }
 
-  /* Primary button — Jasper flame red */
+  /* Primary button — terracotta */
   .btn-primary {
     @apply bg-flame-600 hover:bg-flame-700 text-white font-semibold px-6 py-3 rounded-xl
            transition-all duration-200 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed
            shadow-sm;
   }
 
-  /* Secondary button — light gray */
+  /* Secondary button — light warm gray */
   .btn-secondary {
     @apply bg-xeo-border hover:bg-xeo-subtle text-navy font-medium px-5 py-2.5 rounded-xl
            transition-all duration-200 active:scale-95 border border-xeo-border;
@@ -65,14 +65,14 @@
 
   /* XP & level badges */
   .xp-badge {
-    @apply inline-flex items-center gap-1 bg-amber-100 text-amber-700 text-xs font-bold
-           px-2.5 py-1 rounded-full border border-amber-200;
+    @apply inline-flex items-center gap-1 bg-flame-100 text-flame-700 text-xs font-bold
+           px-2.5 py-1 rounded-full border border-flame-200;
   }
   .level-badge {
     @apply inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full;
   }
 
-  /* Info / callout boxes — light mode */
+  /* Info / callout boxes */
   .callout-info    { @apply bg-aria-50 border border-aria-200 text-aria-800 rounded-xl p-4 text-sm leading-relaxed; }
   .callout-warning { @apply bg-amber-50 border border-amber-200 text-amber-800 rounded-xl p-4 text-sm leading-relaxed; }
   .callout-danger  { @apply bg-red-50 border border-red-200 text-red-800 rounded-xl p-4 text-sm leading-relaxed; }
@@ -82,25 +82,25 @@
 }
 
 @layer utilities {
-  /* Gradient text — flame to purple */
+  /* Gradient text — terracotta warm */
   .text-gradient {
-    @apply bg-gradient-to-r from-flame-600 to-jasper-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-flame-600 to-flame-400 bg-clip-text text-transparent;
   }
 
-  /* Glows */
+  /* Glows — warm, subtle */
   .glow-flame {
-    box-shadow: 0 0 24px rgba(250, 64, 40, 0.2);
+    box-shadow: 0 0 24px rgba(200, 75, 49, 0.18);
   }
   .glow-jasper {
-    box-shadow: 0 0 24px rgba(196, 77, 240, 0.18);
+    box-shadow: 0 0 24px rgba(74, 109, 90, 0.15);
   }
   .glow-aria {
-    box-shadow: 0 0 24px rgba(59, 130, 246, 0.18);
+    box-shadow: 0 0 24px rgba(112, 100, 88, 0.12);
   }
 
-  /* Text highlight — Jasper lime-green marker effect */
+  /* Text highlight — warm cream marker */
   .text-highlight {
-    background-color: #c8f09a;
+    background-color: #f5ede6;
     padding: 0 3px 1px;
     border-radius: 2px;
   }
@@ -110,11 +110,11 @@
   .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 }
 
-/* Custom scrollbar — light mode */
+/* Custom scrollbar — warm cream */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #f5f4f0; }
-::-webkit-scrollbar-thumb { background: #d8d6d0; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #c4c2bb; }
+::-webkit-scrollbar-track { background: #faf8f5; }
+::-webkit-scrollbar-thumb { background: #e8dcd0; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #dcc8b6; }
 
 /* Drag and drop */
 .dnd-dragging { @apply opacity-50 scale-95 rotate-2; }
@@ -137,17 +137,15 @@
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: clamp(32px, 12%, 80px);
   position: relative;
 }
 
 /* ─── Print / Learning Summary ─── */
 @media print {
-  /* Hide everything except summary content */
   .no-print { display: none !important; }
   header, nav, footer, .flag-btn { display: none !important; }
-
-  /* Show print-only elements */
   .print-only { display: block !important; }
 
   body, html {
@@ -161,25 +159,21 @@
     padding: 0;
   }
 
-  /* Cards print flat */
   .card, .summary-module {
     box-shadow: none !important;
     border: 1px solid #d1d5db !important;
     break-inside: avoid;
   }
 
-  /* Page breaks between levels */
   .summary-content > div + div {
     page-break-before: auto;
   }
 
-  /* Ensure full-width layout */
   .flex-1, main {
     width: 100% !important;
     max-width: 100% !important;
   }
 
-  /* Grid columns for stats */
   .grid-cols-2, .grid-cols-4, .sm\:grid-cols-4 {
     grid-template-columns: repeat(4, 1fr) !important;
   }

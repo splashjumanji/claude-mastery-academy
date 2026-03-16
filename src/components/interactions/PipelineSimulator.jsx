@@ -308,12 +308,12 @@ export function PipelineSimulator({ lessons, simulator, onComplete }) {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-2xl mx-auto text-center">
       <div className="lesson-card mb-5">
         <div className="text-4xl mb-3">{finalScore >= 70 ? '🎯' : finalScore >= 50 ? '📈' : '📚'}</div>
-        <div className="text-xl font-bold mb-1 text-navy">Aria's Citation Probability</div>
+        <div className="text-xl font-bold mb-1 text-navy">Agent Design Score</div>
         <div className="text-5xl font-black text-gradient my-4">{finalScore}%</div>
         <div className="text-xeo-muted text-sm mb-5">
-          {finalScore >= 70 ? "Strong! Your decisions maximized Aria's citation probability." :
+          {finalScore >= 70 ? "Strong! Your decisions produced a well-designed, production-ready agent." :
            finalScore >= 50 ? 'Decent start. A few key decisions could have improved this significantly.' :
-           'Aria is unlikely to be cited. Review the choices that hurt the most.'}
+           "The agent design has gaps. Review the choices that hurt the score."}
         </div>
 
         <div className="space-y-2 text-left">

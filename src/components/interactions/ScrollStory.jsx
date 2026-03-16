@@ -560,9 +560,25 @@ export function ScrollStory({ lessons, onComplete }) {
   const platformRevealIdx = useMemo(() => beats.findIndex(b => b.type === 'platform_reveal'), [beats])
   const platformCount     = platformRevealIdx >= 0 ? (beats[platformRevealIdx].platforms?.length ?? 0) : 0
 
+  const outerRef      = useRef(null)
   const containerRef  = useRef(null)
   const currentIdxRef = useRef(0)
   const completedRef  = useRef(false)
+
+  // Dynamically measure the element's top offset so the container fills exactly
+  // the remaining viewport height regardless of masthead/header size changes.
+  const [containerHeight, setContainerHeight] = useState('calc(100dvh - 380px)')
+  useEffect(() => {
+    const update = () => {
+      if (!outerRef.current) return
+      const top = outerRef.current.getBoundingClientRect().top
+      setContainerHeight(`calc(100dvh - ${Math.round(top)}px)`)
+    }
+    update()
+    const ro = new ResizeObserver(update)
+    ro.observe(document.documentElement)
+    return () => ro.disconnect()
+  }, [])
 
   const [currentBeat, setCurrentBeat] = useState(0)
   const [seenBeats, setSeenBeats]     = useState(() => new Set([0]))
@@ -800,8 +816,7 @@ export function ScrollStory({ lessons, onComplete }) {
   }, [platformRevealIdx, platformCount])
 
   // ── Last-beat gesture-gated advance ──
-  // Replaces the old setTimeout(onComplete, 1800) auto-timer.
-  // Stays on the last beat; only a new deliberate downward scroll fires onComplete.
+  // Stays on the last beat; only a new deliberate downward scroll/swipe fires onComplete.
   useEffect(() => {
     if (beats.length === 0) return
     let gestureEndTimer = null
@@ -826,9 +841,32 @@ export function ScrollStory({ lessons, onComplete }) {
       onComplete()
     }
 
+    // Touch support for mobile — a deliberate downward swipe on the last beat
+    let lastBeatTouchStartY = 0
+    const handleTouchStart = (e) => {
+      if (currentIdxRef.current !== beats.length - 1) return
+      lastBeatTouchStartY = e.touches[0].clientY
+      // Reset gate so a fresh gesture can fire onComplete
+      waitForLastBeatGestureRef.current = false
+    }
+    const handleTouchEnd = (e) => {
+      if (currentIdxRef.current !== beats.length - 1) return
+      if (completedRef.current) return
+      if (isLockedRef.current) return
+      const dy = lastBeatTouchStartY - e.changedTouches[0].clientY
+      if (dy > 40) {  // swipe upward on screen = scroll down through content
+        completedRef.current = true
+        onComplete()
+      }
+    }
+
     window.addEventListener('wheel', handleWheel, { passive: true })
+    window.addEventListener('touchstart', handleTouchStart, { passive: true })
+    window.addEventListener('touchend', handleTouchEnd, { passive: true })
     return () => {
       window.removeEventListener('wheel', handleWheel)
+      window.removeEventListener('touchstart', handleTouchStart)
+      window.removeEventListener('touchend', handleTouchEnd)
       clearTimeout(gestureEndTimer)
     }
   }, [beats.length, onComplete])
@@ -836,7 +874,7 @@ export function ScrollStory({ lessons, onComplete }) {
   if (!beats.length) return null
 
   return (
-    <div className="relative" style={{ height: 'calc(100vh - 224px)' }}>
+    <div ref={outerRef} className="relative" style={{ height: containerHeight }}>
 
       {/* ── Scroll snap container ── */}
       <div ref={containerRef} className="scroll-story-container">

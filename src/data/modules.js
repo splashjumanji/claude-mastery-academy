@@ -170,12 +170,12 @@ export const MODULES = {
       {
         id: 'l2_4',
         heading: 'Co-work: delegation, not dictation.',
-        body: 'Co-work mode lets Claude work on artifacts autonomously while you keep chatting. Ask it to write a technical RFC, then discuss team priorities while it works. When it finishes, review and refine.',
+        body: 'Co-work mode lets Claude work on artifacts autonomously while you keep chatting. Ask it to write a technical Request for Comments (RFC), then discuss team priorities while it works. When it finishes, review and refine.',
         type: 'concept',
         keyPoints: [
           { text: 'Co-work is ideal for longer generation tasks: design docs, code reviews, research summaries.' },
           { text: 'You set the direction, Claude executes. Review when ready.' },
-          { text: 'Tip: be specific in your delegation prompt. "Write a 500-word RFC for migrating to event-driven auth" beats "write something about auth".' },
+          { text: 'Tip: be specific in your delegation prompt. "Write a 500-word Request for Comments (RFC) for migrating to event-driven auth" beats "write something about auth".' },
         ],
       },
     ],
@@ -269,7 +269,7 @@ export const MODULES = {
         body: 'Claude Code does not just answer questions. It operates in an agentic loop: it thinks about what to do, uses tools (reading files, running commands, editing code), observes the results, and decides the next step. One prompt can trigger dozens of tool calls.',
         type: 'concept',
         keyPoints: [
-          { text: 'Plan → Act → Observe → Decide → Repeat. This is the core agent loop.' },
+          { text: 'Plan → Act → Observe → Decide → Repeat. The loop starts at Plan because the initial observation has already happened — Claude received your request. From there it plans the next action, executes it using a tool, observes the result, decides what to do next, and repeats until done.' },
           { text: 'Tools include: reading files, listing directories, running terminal commands, editing files, searching code.' },
           { text: 'Claude Code plans multi-step changes and executes them in sequence.' },
           { text: 'You can interrupt at any time. Every destructive action asks for permission.' },
@@ -466,7 +466,7 @@ export const MODULES = {
         body: 'Forget "magic words." The best prompt engineering technique is breaking complex tasks into clear, specific sub-tasks. Claude excels when it knows exactly what you want, in what format, with what constraints.',
         type: 'concept',
         keyPoints: [
-          { text: 'Be specific: "Write a function that validates email addresses using RFC 5322 regex" beats "write an email validator."' },
+          { text: 'Be specific: "Write a function that validates email addresses using Request for Comments 5322 (RFC 5322) regex" beats "write an email validator."' },
           { text: 'Specify format: "Return a JSON object with fields: valid (boolean), reason (string)."' },
           { text: 'Set constraints: "Maximum 50 lines. No external dependencies. Must handle edge cases: empty string, null, unicode."' },
           { text: 'Give examples: one good input/output example is worth 100 words of description.' },

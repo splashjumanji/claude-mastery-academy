@@ -19,11 +19,11 @@ export function getAriaReportCard(score, completedModules) {
   const level4Done = [11, 12, 13].every(id => completedModules.includes(id))
 
   const platforms = {
-    chatgpt: getClaudeAIState(score, completedModules),
-    perplexity: getClaudeCodeState(score, completedModules),
-    google_aio: getAPIHarnessState(score, completedModules),
-    gemini: getWorkflowState(score, completedModules),
-    claude: getTeamAdoptionState(score, completedModules),
+    claude_ai: getClaudeAIState(score, completedModules),
+    claude_code: getClaudeCodeState(score, completedModules),
+    claude_api: getAPIHarnessState(score, completedModules),
+    workflows: getWorkflowState(score, completedModules),
+    team: getTeamAdoptionState(score, completedModules),
   }
 
   return {
@@ -225,7 +225,7 @@ function getScoreSummary(score) {
 export const ARIA_BASELINE_ISSUES = [
   'No CLAUDE.md files in any repository',
   'No team-wide Claude.ai Projects or shared instructions',
-  'Engineers copy-paste code into ChatGPT with no context management',
+  'Engineers have no shared prompting conventions or context management strategy',
   'No custom MCP servers or tool integrations',
   'No structured prompting conventions or templates',
   'No agent harnesses or API usage in production',

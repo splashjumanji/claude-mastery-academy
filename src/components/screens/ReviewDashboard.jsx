@@ -33,7 +33,7 @@ function PasswordGate({ onAuth }) {
           <span className="text-2xl">🔒</span>
         </div>
         <h1 className="text-xl font-bold text-navy mb-1">Content Review</h1>
-        <p className="text-xeo-muted text-sm mb-8">AISV Academy admin access</p>
+        <p className="text-xeo-muted text-sm mb-8">Claude Mastery Academy admin access</p>
 
         <motion.form
           onSubmit={handleSubmit}
@@ -472,7 +472,7 @@ function buildUpdateCursorPrompt(proposal) {
   const lessonHint = proposal.lessonId ? ` (lesson \`${proposal.lessonId}\`)` : ''
 
   return [
-    `# AISV Academy — Update content in ${modTitle}`,
+    `# Claude Mastery Academy — Update content in ${modTitle}`,
     '',
     `## What to update`,
     `**Field:** ${proposal.fieldLabel}${lessonHint}`,
@@ -663,7 +663,7 @@ function buildCursorPrompt(proposal) {
 }`
 
   return [
-    `# AISV Academy — Add new lesson to ${modTitle}`,
+    `# Claude Mastery Academy — Add new lesson to ${modTitle}`,
     '',
     `## What to add`,
     proposal.proposedValue || proposal.fieldLabel,
@@ -972,7 +972,7 @@ export function ReviewDashboard() {
             </div>
             <div>
               <h1 className="text-base font-bold text-navy leading-tight">Content Review</h1>
-              <p className="text-xs text-xeo-muted">AISV Academy</p>
+              <p className="text-xs text-xeo-muted">Claude Mastery Academy</p>
             </div>
           </div>
           <div className="flex items-center gap-3">

@@ -24,7 +24,7 @@ function CitationScore({ score }) {
   const color = score < 30 ? 'bg-red-500' : score < 60 ? 'bg-amber-500' : 'bg-green-500'
   return (
     <div className="flex items-center gap-3">
-      <span className="text-xs text-xeo-muted font-semibold">Citation Score</span>
+      <span className="text-xs text-xeo-muted font-semibold">Velocity Score</span>
       <div className="flex-1 progress-bar">
         <motion.div
           className={`progress-fill ${color}`}
@@ -54,7 +54,7 @@ export function ContentEditor({ title, instruction, originalContent, fixedConten
           <h2 className="text-xl font-bold mb-2 text-navy">{title}</h2>
           <p className="text-xeo-muted text-sm mb-5">{instruction}</p>
           <CitationScore score={beforeScore} />
-          <p className="text-xs text-xeo-muted mt-3">Aria's current blog post scores {beforeScore}% for AI citation readiness. Let's transform it.</p>
+          <p className="text-xs text-xeo-muted mt-3">This content scores {beforeScore}% for AI readiness. Let's transform it.</p>
         </div>
         <button onClick={() => setStep('compare')} className="btn-primary w-full py-4">See the transformation →</button>
       </motion.div>

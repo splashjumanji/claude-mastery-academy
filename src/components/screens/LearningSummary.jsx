@@ -134,7 +134,7 @@ export function LearningSummary({ progress }) {
 
         {/* Print header */}
         <div className="print-only hidden mb-8 pb-6 border-b border-xeo-border">
-          <h1 className="text-3xl font-bold text-navy">AISV Academy</h1>
+          <h1 className="text-3xl font-bold text-navy">Claude Mastery Academy</h1>
           <p className="text-xl text-xeo-muted mt-1">Learning Summary</p>
           <p className="text-sm text-xeo-muted mt-1">{today}</p>
         </div>
@@ -155,7 +155,7 @@ export function LearningSummary({ progress }) {
           </div>
           <div className="card p-4 text-center">
             <div className="text-2xl font-bold text-aria-600">{progress.ariaScore}/100</div>
-            <div className="text-xs text-xeo-muted mt-0.5">Aria Score</div>
+            <div className="text-xs text-xeo-muted mt-0.5">Nexus Velocity</div>
           </div>
         </div>
 
@@ -180,7 +180,7 @@ export function LearningSummary({ progress }) {
         {/* Completion message */}
         {isComplete && (
           <div className="callout-success mb-6 text-sm">
-            <strong>Course complete!</strong> You&apos;ve worked through all 13 modules of AISV Academy. Aria is a market leader in AI search visibility.
+            <strong>Course complete!</strong> You&apos;ve worked through all 13 modules of Claude Mastery Academy. Nexus is running on full AI-augmented velocity.
           </div>
         )}
 
@@ -224,7 +224,7 @@ export function LearningSummary({ progress }) {
 
         {/* Print footer */}
         <div className="print-only hidden mt-8 pt-4 border-t border-xeo-border text-xs text-xeo-muted text-center">
-          AISV Academy — AI Search Visibility · {today}
+          Claude Mastery Academy · {today}
         </div>
       </div>
 

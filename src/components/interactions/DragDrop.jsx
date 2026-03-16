@@ -8,7 +8,13 @@ const BUCKET_COLORS = {
   SEO:          { border: 'border-blue-400',    bg: 'bg-blue-50',    text: 'text-blue-600',    label: 'bg-blue-100 border-blue-300' },
   AEO:          { border: 'border-purple-400',  bg: 'bg-purple-50',  text: 'text-purple-600',  label: 'bg-purple-100 border-purple-300' },
   GEO:          { border: 'border-emerald-400', bg: 'bg-emerald-50', text: 'text-emerald-600', label: 'bg-emerald-100 border-emerald-300' },
+  // Module 2 — Claude.ai features
+  projects:     { border: 'border-aria-400',    bg: 'bg-aria-50',    text: 'text-aria-700',    label: 'bg-aria-100 border-aria-300' },
+  artifacts:    { border: 'border-jasper-400',  bg: 'bg-jasper-50',  text: 'text-jasper-700',  label: 'bg-jasper-100 border-jasper-300' },
+  cowork:       { border: 'border-flame-400',   bg: 'bg-flame-50',   text: 'text-flame-700',   label: 'bg-flame-100 border-flame-300' },
 }
+
+const DEFAULT_BUCKET_COLOR = { border: 'border-xeo-border', bg: 'bg-xeo-subtle', text: 'text-navy', label: 'bg-xeo-subtle border-xeo-border' }
 
 export function DragDrop({ title, description, items, buckets, onComplete }) {
   const [placements, setPlacements] = useState({})
@@ -57,7 +63,7 @@ export function DragDrop({ title, description, items, buckets, onComplete }) {
               const correct = placements[item.id] === item.correctBucket
               const bucket = buckets.find(b => b.id === item.correctBucket)
               const placedBucket = buckets.find(b => b.id === placements[item.id])
-              const c = BUCKET_COLORS[item.correctBucket]
+              const c = BUCKET_COLORS[item.correctBucket] ?? DEFAULT_BUCKET_COLOR
               return (
                 <div key={item.id} className={`p-3 rounded-xl border ${correct ? 'border-green-300 bg-green-50' : 'border-amber-300 bg-amber-50'}`}>
                   <div className="flex items-start gap-2 mb-1">
@@ -94,7 +100,7 @@ export function DragDrop({ title, description, items, buckets, onComplete }) {
       {/* Bucket targets */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
         {buckets.map(bucket => {
-          const c = BUCKET_COLORS[bucket.id]
+          const c = BUCKET_COLORS[bucket.id] ?? DEFAULT_BUCKET_COLOR
           const placed = items.filter(i => placements[i.id] === bucket.id)
           const isHover = hovering === bucket.id
           return (

@@ -15,83 +15,80 @@ export function Welcome({ onComplete }) {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="max-w-2xl w-full text-center"
+        className="max-w-3xl w-full"
       >
-        {/* Logo */}
+        {/* Editorial masthead */}
         <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.1, duration: 0.5 }}
-          className="mb-8 flex justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1 }}
+          className="text-center mb-10"
         >
-          <div className="w-20 h-20 rounded-2xl bg-flame-600 flex items-center justify-center text-4xl font-black text-white shadow-xl glow-flame">
-            CM
+          <div className="text-[11px] tracking-[0.25em] uppercase text-xeo-muted mb-4">
+            The Anthropic Learning Series
           </div>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-          <h1 className="text-4xl sm:text-5xl font-display mb-3 text-navy">
-            Welcome to <span className="text-gradient">Claude Mastery</span>
+          <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-navy mb-3 leading-tight">
+            Claude <em className="italic text-flame-600">Mastery</em> Academy
           </h1>
-          <p className="text-xl text-xeo-muted mb-8">
+          <div className="w-20 h-px bg-flame-600 mx-auto my-4" />
+          <p className="text-lg text-xeo-muted max-w-xl mx-auto leading-relaxed">
             From first conversation to production agent harnesses, master every layer of Claude.
           </p>
         </motion.div>
 
-        {/* Nexus intro card */}
+        {/* Mission card — editorial two-column */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="card p-6 mb-8 text-left border-aria-200"
+          transition={{ delay: 0.3 }}
+          className="grid grid-cols-1 md:grid-cols-[2fr_1fr] border-t-[3px] border-navy mb-10"
         >
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-aria-600 flex items-center justify-center text-xl shrink-0 text-white">
-              🚀
+          <div className="p-6 sm:p-8 border-b md:border-b-0 md:border-r border-xeo-border">
+            <div className="text-[11px] tracking-[0.15em] uppercase text-flame-600 font-semibold mb-3">
+              Your Mission
             </div>
-            <div>
-              <div className="text-sm text-aria-600 font-semibold mb-1">Your mission</div>
-              <h2 className="text-lg font-bold mb-2 text-navy">You're the new Head of Developer Productivity at Nexus.</h2>
-              <p className="text-sm text-xeo-muted leading-relaxed">
-                Nexus is a mid-stage startup with a 12-person engineering team drowning in technical debt
-                and shipping too slowly. <strong className="text-navy">Your job: embed Claude across the entire
-                engineering workflow</strong> to turn things around; from how engineers write code to how the team
-                builds and deploys agent-powered systems.
-              </p>
-              <p className="text-sm text-xeo-muted mt-2 leading-relaxed">
-                Over 13 modules, you'll master Claude.ai, Claude Code, and the Claude API, and build
-                Nexus into a team that ships 3x faster with AI. Every decision you make changes Nexus's Velocity Score.
-              </p>
-            </div>
+            <h2 className="font-display text-xl font-bold mb-3 text-navy leading-snug">
+              You're the new Head of Developer Productivity at Nexus.
+            </h2>
+            <p className="text-sm text-xeo-muted leading-relaxed mb-3">
+              Nexus is a mid-stage startup with a 12-person engineering team drowning in technical debt
+              and shipping too slowly. <strong className="text-navy">Your job: embed Claude across the entire
+              engineering workflow</strong> to turn things around.
+            </p>
+            <p className="text-sm text-xeo-muted leading-relaxed">
+              Over 13 modules, you'll master Claude.ai, Claude Code, and the Claude API, and build
+              Nexus into a team that ships 3x faster with AI.
+            </p>
+          </div>
+          <div className="p-6 sm:p-8 bg-xeo-subtle flex flex-col gap-5">
+            {[
+              { level: '101', title: 'Foundations', desc: 'Claude.ai, Claude Code, and when to use each' },
+              { level: '201–301', title: 'Mastery', desc: 'Prompting, MCP, agent architecture' },
+              { level: '401', title: 'Advanced', desc: 'Multi-agent systems, evaluation, production' },
+            ].map(item => (
+              <div key={item.level}>
+                <div className="text-[10px] tracking-[0.15em] uppercase text-xeo-muted mb-0.5">{item.level}</div>
+                <div className="text-sm font-semibold text-navy">{item.title}</div>
+                <div className="text-xs text-xeo-muted">{item.desc}</div>
+              </div>
+            ))}
           </div>
         </motion.div>
 
-        {/* What you'll learn */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.55 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8"
+          transition={{ delay: 0.5 }}
+          className="text-center"
         >
-          {[
-            { icon: '🧠', level: '101', title: 'Foundations', desc: 'Understand Claude.ai, Claude Code, and when to use each' },
-            { icon: '⚙️', level: '201–301', title: 'Mastery & Harnesses', desc: 'Prompting, MCP, agent architecture, and building harnesses' },
-            { icon: '🚀', level: '401', title: 'Advanced Patterns', desc: 'Multi-agent systems, evaluation, and scaling to production' },
-          ].map(item => (
-            <div key={item.level} className="card p-4 text-left">
-              <div className="text-2xl mb-2">{item.icon}</div>
-              <div className="text-xs text-xeo-muted font-semibold mb-1">{item.level}</div>
-              <div className="text-sm font-semibold mb-1 text-navy">{item.title}</div>
-              <div className="text-xs text-xeo-muted">{item.desc}</div>
-            </div>
-          ))}
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
-          <button onClick={handleStart} className="btn-primary text-lg px-10 py-4 glow-flame">
-            Start your mission →
+          <button
+            onClick={handleStart}
+            className="bg-navy hover:bg-navy-soft text-white px-10 py-4 text-[13px] tracking-widest uppercase font-medium transition-colors"
+          >
+            Start your mission &rarr;
           </button>
-          <p className="text-xs text-xeo-muted mt-4">13 modules · Learn by doing · No slides</p>
+          <p className="text-xs text-xeo-muted mt-4 tracking-wider">13 modules &middot; Learn by doing &middot; No slides</p>
         </motion.div>
       </motion.div>
     </div>

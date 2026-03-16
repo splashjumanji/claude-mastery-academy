@@ -4,63 +4,64 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Jasper brand flame (primary CTA & brand accent — exact values from jasper.ai)
+        // Editorial primary accent — warm terracotta
         flame: {
-          50:  '#fff4f2',
-          100: '#ffe4de',
-          200: '#ffc9bc',
-          300: '#ffa08c',
-          400: '#ffb3a3',
-          500: '#fa7560',
-          600: '#fa4028',  // jasper.ai primary red-orange
-          700: '#d42e17',
-          800: '#b02210',
-          900: '#8c1a0c',
+          50:  '#fdf6f3',
+          100: '#fae8e0',
+          200: '#f5d0c0',
+          300: '#e8a88a',
+          400: '#d98b68',
+          500: '#c97b56',
+          600: '#c84b31',
+          700: '#a53a24',
+          800: '#882f1e',
+          900: '#6e2518',
         },
-        // Jasper navy (text color from jasper.ai)
+        // Warm brown text
         navy: {
-          DEFAULT: '#00063d',
-          soft: '#1a2050',
-          muted: '#4a5280',
+          DEFAULT: '#3d2e27',
+          soft:    '#5c4a42',
+          muted:   '#8b7a6e',
         },
-        // Purple (kept for gamification/XP/level elements)
+        // Muted sage — gamification / secondary accent
         jasper: {
-          50:  '#fdf4ff',
-          100: '#fae8ff',
-          200: '#f3d0fe',
-          300: '#e9a8fd',
-          400: '#d975f9',
-          500: '#c44df0',
-          600: '#a82dd4',
-          700: '#8b22ae',
-          800: '#731f8d',
-          900: '#5f1e72',
+          50:  '#f4f7f5',
+          100: '#e6ede9',
+          200: '#cddbd2',
+          300: '#a8c0b0',
+          400: '#7fa28d',
+          500: '#5e8670',
+          600: '#4a6d5a',
+          700: '#3d5949',
+          800: '#33493c',
+          900: '#2a3c32',
         },
-        // Blue (Aria citation / learning metrics)
+        // Warm slate — citations / metrics
         aria: {
-          50:  '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
+          50:  '#f7f6f4',
+          100: '#edebe6',
+          200: '#dbd7ce',
+          300: '#c4bcaf',
+          400: '#a89e8f',
+          500: '#948776',
+          600: '#877a6a',
+          700: '#706458',
+          800: '#5e544b',
+          900: '#4e4640',
         },
-        // Light-mode surface system
+        // Light-mode surface system — warm cream
         xeo: {
-          bg:      '#f5f4f0',   // warm off-white page background
-          surface: '#ffffff',   // cards / panels
-          border:  '#e5e3dd',   // light borders
-          muted:   '#6b7a99',   // muted/secondary text
-          subtle:  '#f0eeea',   // subtle inner backgrounds
+          bg:      '#faf8f5',
+          surface: '#ffffff',
+          border:  '#e8dcd0',
+          muted:   '#8b7a6e',
+          subtle:  '#f5ede6',
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['"DM Serif Display"', 'Georgia', 'serif'],
+        sans:    ['DM Sans', 'system-ui', 'sans-serif'],
+        display: ['"Playfair Display"', 'Georgia', 'serif'],
+        mono:    ['DM Mono', 'monospace'],
       },
       animation: {
         'pulse-slow':    'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',

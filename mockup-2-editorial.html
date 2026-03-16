@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Mastery Academy — Editorial</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --ink: #1a1a2e;
+    --ink-mid: #3d3d5c;
+    --ink-light: #6b6b8a;
+    --page: #faf9f6;
+    --page-warm: #f5f3ee;
+    --rule: #e8e5de;
+    --rule-dark: #c8c4bb;
+    --accent: #c84b31;       /* rich terracotta */
+    --accent-light: rgba(200, 75, 49, 0.08);
+    --gold: #b5882a;
+    --gold-light: rgba(181, 136, 42, 0.1);
+    --sage: #3d6b5e;
+    --sage-light: rgba(61, 107, 94, 0.1);
+    --lavender: #5a4f8c;
+    --lavender-light: rgba(90, 79, 140, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--page);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ── Masthead ── */
+  .masthead {
+    border-bottom: 3px double var(--ink);
+    padding: 0 48px;
+  }
+
+  .masthead-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 12px;
+    color: var(--ink-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .masthead-top a {
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .masthead-top a:hover { color: var(--accent); }
+
+  .masthead-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 0 20px;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .wordmark {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .wordmark em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .tagline {
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    font-weight: 400;
+  }
+
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 12px 0 0;
+    border-top: 1px solid var(--rule);
+    margin-top: 16px;
+  }
+
+  .masthead-nav a {
+    padding: 8px 20px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+    border-right: 1px solid var(--rule);
+    transition: all 0.15s;
+  }
+
+  .masthead-nav a:first-child { border-left: 1px solid var(--rule); }
+  .masthead-nav a:hover { background: var(--ink); color: var(--page); }
+  .masthead-nav a.active { background: var(--ink); color: var(--page); }
+
+  /* ── Layout ── */
+  .page-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* ── Byline band ── */
+  .byline-band {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 40px;
+  }
+
+  .byline-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .byline-item .bl-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+
+  .byline-item .bl-val {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .byline-item .bl-val.accent { color: var(--accent); }
+  .byline-item .bl-val.gold { color: var(--gold); }
+
+  .byline-divider {
+    width: 1px;
+    height: 36px;
+    background: var(--rule-dark);
+  }
+
+  .byline-band .nexus {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nexus-label-ed {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+
+  .nexus-meter {
+    width: 120px;
+    height: 6px;
+    background: var(--rule);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .nexus-fill-ed {
+    height: 100%;
+    width: 38%;
+    background: linear-gradient(90deg, var(--sage), var(--gold));
+    border-radius: 3px;
+  }
+
+  .nexus-score-ed {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--sage);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── Pull quote / mission brief ── */
+  .mission-brief {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 48px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 48px;
+  }
+
+  .mission-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .mission-text h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .mission-text p {
+    font-size: 15px;
+    color: var(--ink-mid);
+    line-height: 1.75;
+    max-width: 540px;
+  }
+
+  .mission-sidebar {
+    border-left: 3px solid var(--ink);
+    padding-left: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .pull-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.45;
+    color: var(--ink);
+    position: relative;
+  }
+
+  .pull-quote::before {
+    content: '\201C';
+    font-size: 60px;
+    line-height: 0;
+    position: absolute;
+    top: 16px;
+    left: -8px;
+    color: var(--accent);
+    opacity: 0.3;
+  }
+
+  .pull-attribution {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .section-title .rule-left {
+    flex: 1;
+    height: 1px;
+    background: var(--ink);
+    max-width: 40px;
+  }
+
+  .section-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    color: var(--ink);
+  }
+
+  .section-title .level-tag {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    padding: 2px 8px;
+    border: 1px solid var(--rule-dark);
+  }
+
+  .section-title .rule-right {
+    flex: 1;
+    height: 1px;
+    background: var(--rule-dark);
+  }
+
+  /* ── Level blocks ── */
+  .level-section {
+    margin-bottom: 52px;
+  }
+
+  .level-deck {
+    font-size: 13px;
+    color: var(--ink-light);
+    margin-bottom: 24px;
+    padding-left: 40px;
+    font-style: italic;
+    border-left: 2px solid var(--rule-dark);
+    padding: 8px 0 8px 16px;
+    margin-left: 40px;
+  }
+
+  /* ── Module cards ── */
+  .module-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 2px;
+  }
+
+  .mod-card {
+    background: var(--page);
+    padding: 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .mod-card:hover { background: var(--page-warm); }
+
+  .mod-card.done { background: color-mix(in srgb, var(--sage) 5%, var(--page)); }
+  .mod-card.active-mod { background: color-mix(in srgb, var(--accent) 5%, var(--page)); }
+  .mod-card.locked-mod { opacity: 0.5; cursor: not-allowed; }
+
+  .mod-card .mod-num {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mod-card .status-chip {
+    font-size: 10px;
+    padding: 2px 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .status-chip.done-chip { color: var(--sage); border: 1px solid var(--sage); }
+  .status-chip.active-chip { color: var(--accent); border: 1px solid var(--accent); }
+  .status-chip.lock-chip { color: var(--ink-light); border: 1px solid var(--rule-dark); }
+
+  .mod-card .mod-title-ed {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .mod-card.active-mod .mod-title-ed { color: var(--accent); }
+
+  .mod-card .mod-dek {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.55;
+    margin-bottom: 20px;
+  }
+
+  .mod-card .mod-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-size: 12px;
+  }
+
+  .mod-card .mod-foot .time { color: var(--ink-light); }
+  .mod-card .mod-foot .xp { color: var(--gold); font-weight: 600; font-family: 'DM Mono', monospace; }
+  .mod-card .mod-foot .score { color: var(--sage); font-family: 'DM Mono', monospace; font-weight: 500; }
+
+  /* Progress meter under card */
+  .card-rule {
+    height: 3px;
+    background: var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-rule-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.5s;
+  }
+
+  .card-rule-fill.done-fill { background: var(--sage); }
+
+  /* ── Wide feature module ── */
+  .mod-feature {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    background: var(--ink);
+    color: var(--page);
+    margin-bottom: 1px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .mod-feature:hover { opacity: 0.95; }
+
+  .mod-feature .feature-body {
+    padding: 32px;
+  }
+
+  .mod-feature .mod-num { color: rgba(255,255,255,0.4); font-size:11px; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:12px; }
+  .mod-feature .mod-title-ed {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: var(--page);
+  }
+
+  .mod-feature .mod-dek { font-size:14px; color:rgba(255,255,255,0.6); line-height:1.6; }
+
+  .mod-feature .feature-meta {
+    padding: 32px;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .mod-feature .feature-meta .meta-block { }
+  .mod-feature .feature-meta .meta-label { font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:4px; }
+  .mod-feature .feature-meta .meta-val { font-size:28px; font-weight:700; color:var(--page); font-family:'Playfair Display', serif; }
+  .mod-feature .feature-meta .meta-val span { font-size:14px; font-family:'DM Sans',sans-serif; font-weight:400; color:rgba(255,255,255,0.5); }
+  .mod-feature .continue-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: white;
+    padding: 10px 20px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+
+  .mod-feature .continue-btn:hover { background: #a53a24; }
+
+  /* ── Level status line ── */
+  .level-status-line {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    margin-bottom: 20px;
+  }
+
+  .ls-progress {
+    flex: 1;
+    max-width: 200px;
+    height: 3px;
+    background: var(--rule);
+    overflow: hidden;
+  }
+
+  .ls-progress-fill {
+    height: 100%;
+    background: var(--sage);
+  }
+
+  .ls-label { font-size: 12px; color: var(--ink-light); }
+  .ls-count { font-size: 12px; font-weight: 600; color: var(--ink); font-family: 'DM Mono', monospace; }
+
+  /* ── Bottom strip ── */
+  .bottom-strip {
+    border-top: 3px double var(--ink);
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    font-size: 12px;
+    color: var(--ink-light);
+    letter-spacing: 0.06em;
+    margin-top: 48px;
+    background: var(--page-warm);
+  }
+
+  .bottom-strip .edition {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ── Badges strip ── */
+  .badges-strip {
+    display: flex;
+    gap: 12px;
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+    margin-top: 12px;
+  }
+
+  .badge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.35;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .badge-item.earned { opacity: 1; }
+  .badge-item:hover { opacity: 0.7; }
+
+  .badge-icon {
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--rule-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    background: var(--page-warm);
+  }
+
+  .badge-item.earned .badge-icon {
+    border-color: var(--gold);
+    background: var(--gold-light);
+  }
+
+  .badge-label {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    text-align: center;
+    max-width: 60px;
+    line-height: 1.3;
+  }
+</style>
+</head>
+<body>
+
+<!-- Masthead -->
+<div class="masthead">
+  <div class="masthead-top">
+    <span>Curriculum Guide · Spring 2025</span>
+    <span>The Anthropic Learning Series</span>
+    <span>Module 4 of 13 · Practitioner Level</span>
+  </div>
+  <div class="masthead-main">
+    <div class="wordmark">Claude <em>Mastery</em> Academy</div>
+    <div class="tagline">From 101 to 401 · AI Fluency for the Modern Organization</div>
+  </div>
+  <nav class="masthead-nav">
+    <a href="#" class="active">Curriculum</a>
+    <a href="#">Nexus Score</a>
+    <a href="#">Badges</a>
+    <a href="#">Flashcards</a>
+    <a href="#">Learning Summary</a>
+  </nav>
+</div>
+
+<div class="page-wrap">
+
+  <!-- Byline band -->
+  <div class="byline-band">
+    <div class="byline-item">
+      <span class="bl-label">Experience Points</span>
+      <span class="bl-val accent">420 XP</span>
+    </div>
+    <div class="byline-divider"></div>
+    <div class="byline-item">
+      <span class="bl-label">Level</span>
+      <span class="bl-val">Practitioner</span>
+    </div>
+    <div class="byline-divider"></div>
+    <div class="byline-item">
+      <span class="bl-label">Completed</span>
+      <span class="bl-val">3 / 13</span>
+    </div>
+    <div class="byline-divider"></div>
+    <div class="byline-item">
+      <span class="bl-label">Quiz Average</span>
+      <span class="bl-val gold">84%</span>
+    </div>
+    <div class="byline-divider"></div>
+    <div class="byline-item">
+      <span class="bl-label">Day Streak</span>
+      <span class="bl-val">3</span>
+    </div>
+
+    <div class="nexus">
+      <span class="nexus-label-ed">Nexus Velocity</span>
+      <div class="nexus-meter">
+        <div class="nexus-fill-ed"></div>
+      </div>
+      <span class="nexus-score-ed">38</span>
+    </div>
+  </div>
+
+  <!-- Mission Brief -->
+  <div class="mission-brief">
+    <div class="mission-text">
+      <h1>Your Mission:<br>Embed <em>Claude</em> Across Nexus</h1>
+      <p>You've just joined Nexus as Head of Developer Productivity. The company is scaling fast, and your mandate is clear: embed Claude across the engineering workflow — from individual developer tools to cross-functional automation. This curriculum is your roadmap from baseline fluency to architectural mastery.</p>
+    </div>
+    <div class="mission-sidebar">
+      <div class="pull-quote">
+        "The organizations that master AI tools now will define the competitive landscape for the next decade."
+      </div>
+      <div class="pull-attribution">— The Nexus Charter, Module 03</div>
+
+      <div class="badges-strip">
+        <div class="badge-item earned">
+          <div class="badge-icon">⚡</div>
+          <div class="badge-label">Claude Native</div>
+        </div>
+        <div class="badge-item">
+          <div class="badge-icon">🔮</div>
+          <div class="badge-label">Power User</div>
+        </div>
+        <div class="badge-item">
+          <div class="badge-icon">🏗️</div>
+          <div class="badge-label">Harness Builder</div>
+        </div>
+        <div class="badge-item">
+          <div class="badge-icon">🤖</div>
+          <div class="badge-label">Agent Architect</div>
+        </div>
+        <div class="badge-item">
+          <div class="badge-icon">🌐</div>
+          <div class="badge-label">Full Stack</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Level 1 -->
+  <div class="level-section">
+    <div class="section-title">
+      <div class="rule-left"></div>
+      <h2>Level One · The New Landscape</h2>
+      <span class="level-tag">101</span>
+      <div class="rule-right"></div>
+    </div>
+    <div class="level-deck">Understanding Claude's position in the AI ecosystem — completed ✓</div>
+
+    <div class="level-status-line">
+      <span class="ls-label">Level progress</span>
+      <div class="ls-progress"><div class="ls-progress-fill" style="width:100%"></div></div>
+      <span class="ls-count">3 / 3 modules</span>
+      <span class="ls-label">· 300 XP earned</span>
+    </div>
+
+    <div class="module-row">
+      <div class="mod-card done">
+        <div class="mod-num">Module 01 <span class="status-chip done-chip">Complete</span></div>
+        <div class="mod-title-ed">The Search Revolution</div>
+        <div class="mod-dek">How AI is reshaping the fundamental ways we find, synthesize, and use information in the modern workplace.</div>
+        <div class="mod-foot">
+          <span class="time">20 min</span>
+          <span class="score">92% quiz</span>
+          <span class="xp">+100 XP</span>
+        </div>
+      </div>
+      <div class="card-rule"><div class="card-rule-fill done-fill" style="width:100%"></div></div>
+
+      <div class="mod-card done">
+        <div class="mod-num">Module 02 <span class="status-chip done-chip">Complete</span></div>
+        <div class="mod-title-ed">Claude vs. The Field</div>
+        <div class="mod-dek">A rigorous look at benchmarks, capability comparisons, and the specific domains where Claude excels above the competition.</div>
+        <div class="mod-foot">
+          <span class="time">15 min</span>
+          <span class="score">88% quiz</span>
+          <span class="xp">+80 XP</span>
+        </div>
+      </div>
+      <div class="card-rule"><div class="card-rule-fill done-fill" style="width:100%"></div></div>
+
+      <div class="mod-card done">
+        <div class="mod-num">Module 03 <span class="status-chip done-chip">Complete</span></div>
+        <div class="mod-title-ed">AI Strategy 101</div>
+        <div class="mod-dek">Building a coherent, defensible AI adoption strategy for an engineering organization navigating rapid change.</div>
+        <div class="mod-foot">
+          <span class="time">25 min</span>
+          <span class="score">80% quiz</span>
+          <span class="xp">+120 XP</span>
+        </div>
+      </div>
+      <div class="card-rule"><div class="card-rule-fill done-fill" style="width:100%"></div></div>
+    </div>
+  </div>
+
+  <!-- Level 2 — Featured active module -->
+  <div class="level-section">
+    <div class="section-title">
+      <div class="rule-left"></div>
+      <h2>Level Two · The Mechanics</h2>
+      <span class="level-tag">201</span>
+      <div class="rule-right"></div>
+    </div>
+    <div class="level-deck">Prompting, context, model selection, and structuring Claude's output — in progress</div>
+
+    <div class="level-status-line">
+      <span class="ls-label">Level progress</span>
+      <div class="ls-progress"><div class="ls-progress-fill" style="width:12%"></div></div>
+      <span class="ls-count">0 / 4 modules</span>
+      <span class="ls-label">· 120 XP to next badge</span>
+    </div>
+
+    <!-- Featured active module -->
+    <div class="mod-feature">
+      <div class="feature-body">
+        <div class="mod-num">Module 04 · Active</div>
+        <div class="mod-title-ed">Prompting That Works</div>
+        <div class="mod-dek">Principles of effective prompting across the Claude model family. Learn the structures, patterns, and anti-patterns that separate novice prompts from expert ones. Includes interactive content editor exercise.</div>
+      </div>
+      <div class="feature-meta">
+        <div>
+          <div class="meta-block" style="margin-bottom:20px">
+            <div class="meta-label">XP Reward</div>
+            <div class="meta-val">140 <span>XP</span></div>
+          </div>
+          <div class="meta-block">
+            <div class="meta-label">Est. Time</div>
+            <div class="meta-val">30 <span>min</span></div>
+          </div>
+        </div>
+        <button class="continue-btn">Continue → </button>
+      </div>
+    </div>
+
+    <div class="module-row" style="margin-top:1px">
+      <div class="mod-card">
+        <div class="mod-num">Module 05 <span class="status-chip active-chip">Unlocked</span></div>
+        <div class="mod-title-ed">Context & Memory</div>
+        <div class="mod-dek">How context windows shape Claude's behavior and how to structure input for best results.</div>
+        <div class="mod-foot">
+          <span class="time">25 min</span>
+          <span></span>
+          <span class="xp">+120 XP</span>
+        </div>
+      </div>
+
+      <div class="mod-card">
+        <div class="mod-num">Module 06 <span class="status-chip active-chip">Unlocked</span></div>
+        <div class="mod-title-ed">Model Selection</div>
+        <div class="mod-dek">Haiku, Sonnet, Opus — choosing the right model for cost, speed, and capability tradeoffs.</div>
+        <div class="mod-foot">
+          <span class="time">20 min</span>
+          <span></span>
+          <span class="xp">+100 XP</span>
+        </div>
+      </div>
+
+      <div class="mod-card">
+        <div class="mod-num">Module 07 <span class="status-chip active-chip">Unlocked</span></div>
+        <div class="mod-title-ed">Output Formats</div>
+        <div class="mod-dek">Markdown, JSON, XML — structuring and constraining Claude's output for downstream use.</div>
+        <div class="mod-foot">
+          <span class="time">20 min</span>
+          <span></span>
+          <span class="xp">+100 XP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Level 3 -->
+  <div class="level-section">
+    <div class="section-title">
+      <div class="rule-left"></div>
+      <h2>Level Three · Strategic Mastery</h2>
+      <span class="level-tag">301</span>
+      <div class="rule-right"></div>
+    </div>
+    <div class="level-deck" style="opacity:0.5">Agent harnesses, workflow automation, and tool use — locked until Level 2 complete</div>
+
+    <div class="module-row" style="opacity:0.45">
+      <div class="mod-card locked-mod">
+        <div class="mod-num">Module 08 <span class="status-chip lock-chip">Locked</span></div>
+        <div class="mod-title-ed">Agent Harnesses</div>
+        <div class="mod-dek">Building autonomous, multi-step workflows with Claude as the reasoning engine.</div>
+        <div class="mod-foot">
+          <span class="time">35 min</span>
+          <span></span>
+          <span class="xp">+180 XP</span>
+        </div>
+      </div>
+      <div class="mod-card locked-mod">
+        <div class="mod-num">Module 09 <span class="status-chip lock-chip">Locked</span></div>
+        <div class="mod-title-ed">Tool Use & MCP</div>
+        <div class="mod-dek">Integrating external tools and system connections via the Model Context Protocol.</div>
+        <div class="mod-foot">
+          <span class="time">40 min</span>
+          <span></span>
+          <span class="xp">+200 XP</span>
+        </div>
+      </div>
+      <div class="mod-card locked-mod">
+        <div class="mod-num">Module 10 <span class="status-chip lock-chip">Locked</span></div>
+        <div class="mod-title-ed">Workflow Automation</div>
+        <div class="mod-dek">End-to-end process automation — applying Claude across the Nexus engineering stack.</div>
+        <div class="mod-foot">
+          <span class="time">35 min</span>
+          <span></span>
+          <span class="xp">+180 XP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Level 4 -->
+  <div class="level-section">
+    <div class="section-title">
+      <div class="rule-left"></div>
+      <h2>Level Four · The Leading Edge</h2>
+      <span class="level-tag">401</span>
+      <div class="rule-right"></div>
+    </div>
+    <div class="level-deck" style="opacity:0.4">Multi-agent systems, advanced architectural patterns, and the frontier of AI capability</div>
+
+    <div class="module-row" style="opacity:0.3">
+      <div class="mod-card locked-mod">
+        <div class="mod-num">Module 11 <span class="status-chip lock-chip">Locked</span></div>
+        <div class="mod-title-ed">Multi-Agent Systems</div>
+        <div class="mod-dek">Orchestrating networks of Claude instances for complex, distributed reasoning tasks.</div>
+        <div class="mod-foot"><span class="time">45 min</span><span></span><span class="xp">+240 XP</span></div>
+      </div>
+      <div class="mod-card locked-mod">
+        <div class="mod-num">Module 12 <span class="status-chip lock-chip">Locked</span></div>
+        <div class="mod-title-ed">Advanced Patterns</div>
+        <div class="mod-dek">RAG pipelines, evaluation loops, and knowing when fine-tuning is the right decision.</div>
+        <div class="mod-foot"><span class="time">50 min</span><span></span><span class="xp">+260 XP</span></div>
+      </div>
+      <div class="mod-card locked-mod">
+        <div class="mod-num">Module 13 <span class="status-chip lock-chip">Locked</span></div>
+        <div class="mod-title-ed">The Frontier</div>
+        <div class="mod-dek">What's emerging in the Anthropic ecosystem and how to stay at the leading edge.</div>
+        <div class="mod-foot"><span class="time">30 min</span><span></span><span class="xp">+200 XP</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Bottom strip -->
+<div class="bottom-strip">
+  <span class="edition">Claude Mastery Academy</span>
+  <span>·</span>
+  <span>An Anthropic Learning Experience</span>
+  <span style="margin-left:auto">Progress saved · Session active</span>
+</div>
+
+</body>
+</html>
