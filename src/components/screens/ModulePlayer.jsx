@@ -9,6 +9,7 @@ import { DragDrop } from '../interactions/DragDrop'
 import { PipelineSimulator } from '../interactions/PipelineSimulator'
 import { ContentEditor } from '../interactions/ContentEditor'
 import { DecisionTree } from '../interactions/DecisionTree'
+import { BuildAlong } from '../interactions/BuildAlong'
 import { XPToast } from '../ui/XPToast'
 
 // Placeholder for Level 3 & 4 modules not yet fully built
@@ -44,17 +45,17 @@ function ComingSoon({ module, onComplete }) {
 function getPhases(module) {
   switch (module.type) {
     case 'micro_lesson_quiz':
-      return ['lessons', 'quiz']
+      return ['lessons', 'quiz', 'buildstep']
     case 'micro_lesson_matching_quiz':
-      return ['lessons', 'matching', 'quiz']
+      return ['lessons', 'matching', 'quiz', 'buildstep']
     case 'pipeline_simulator_quiz':
-      return ['simulator', 'quiz']
+      return ['simulator', 'quiz', 'buildstep']
     case 'micro_lesson_dragdrop_quiz':
-      return ['lessons', 'dragdrop', 'quiz']
+      return ['lessons', 'dragdrop', 'quiz', 'buildstep']
     case 'content_editor':
-      return ['lessons', 'editor']
+      return ['lessons', 'editor', 'buildstep']
     case 'decision_tree_quiz':
-      return ['lessons', 'decisions', 'quiz']
+      return ['lessons', 'decisions', 'quiz', 'buildstep']
     default:
       return ['coming_soon']
   }
@@ -68,6 +69,7 @@ const PHASE_LABELS = {
   simulator:  { label: 'Simulate', icon: '🔬' },
   editor:     { label: 'Transform', icon: '✍️' },
   decisions:  { label: 'Decide', icon: '🗺️' },
+  buildstep:  { label: 'Build', icon: '🛠️' },
   coming_soon:{ label: 'Module', icon: '🚧' },
 }
 
@@ -173,6 +175,9 @@ export function ModulePlayer({ onModuleComplete }) {
             onComplete={(score) => advancePhase(score)}
           />
         )
+
+      case 'buildstep':
+        return <BuildAlong moduleId={module.id} onComplete={() => advancePhase()} />
 
       case 'coming_soon':
         return <ComingSoon module={module} onComplete={(score) => advancePhase(score)} />

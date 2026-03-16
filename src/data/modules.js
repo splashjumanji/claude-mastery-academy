@@ -256,7 +256,7 @@ export const MODULES = {
         body: 'Claude Code started in the terminal, but now it runs everywhere: your terminal, VS Code, JetBrains, a desktop app, the web, and even Slack. It reads your codebase, understands your project structure, and edits files with your permission.',
         type: 'concept',
         keyPoints: [
-          { text: 'Install: curl -fsSL https://claude.ai/install.sh | bash (or brew install --cask claude-code on macOS)' },
+          { text: 'Install: npm install -g @anthropic-ai/claude-code — requires Node.js 18+.' },
           { text: 'Run: cd your-project && claude — it reads your project and you start chatting.' },
           { text: 'Also available as: VS Code extension, JetBrains plugin, Desktop app (macOS/Windows), Web (claude.ai/code), and in Slack.' },
           { text: 'Every file edit requires your approval. You see the diff before anything changes.' },
@@ -301,7 +301,7 @@ export const MODULES = {
       surfaceLabel: 'Claude Code',
       title: 'Scaffold the onboard-agent project',
       instructions: [
-        'Install Claude Code if you haven\'t: curl -fsSL https://claude.ai/install.sh | bash',
+        'Install Claude Code if you haven\'t: npm install -g @anthropic-ai/claude-code (requires Node.js 18+)',
         'Create and enter your project: mkdir onboard-agent && cd onboard-agent',
         'Start Claude Code: claude',
         'Tell Claude: "Initialize a Node.js CLI project called onboard-agent. Create package.json with a bin entry, a src/index.js entry point that accepts a directory path argument, and a README.md. Also create a CLAUDE.md with the project\'s purpose and conventions."',
