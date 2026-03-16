@@ -28,7 +28,7 @@ function ComingSoon({ module, onComplete }) {
             module.type === 'channel_allocator' ? 'a 90-day third-party content strategy builder' :
             module.type === 'agent_simulation' ? 'an agentic commerce simulation — guide an AI agent evaluating Aria' :
             module.type === 'workflow_designer' ? 'a continuous optimization loop workflow designer' :
-            'a full Jasper capability mapping exercise with final Aria Report Card'}
+            'a full capability mapping exercise with final Nexus Velocity Card'}
           </p>
         </div>
         <div className="text-xs text-xeo-muted">Estimated time: {module.estimatedMinutes} minutes · +{module.xpReward} XP</div>

@@ -9,7 +9,7 @@ const STATUS_STYLES = {
   strong:    { dot: 'bg-green-500',  label: 'text-green-700',  card: 'border-green-200 bg-green-50' },
 }
 
-const PLATFORM_NAMES = { chatgpt: 'ChatGPT', perplexity: 'Perplexity', google_aio: 'Google AI Overviews', gemini: 'Gemini', claude: 'Claude' }
+const PLATFORM_NAMES = { claude_ai: 'Claude.ai', claude_code: 'Claude Code', claude_api: 'Claude API', workflows: 'Automated Workflows', team: 'Team Adoption' }
 
 function PlatformCard({ platform, state }) {
   const s = STATUS_STYLES[state.status]
@@ -45,8 +45,8 @@ export function AriaReportCard({ progress }) {
       {/* Header */}
       <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl font-display text-navy">Aria Report Card</h1>
-          <p className="text-xeo-muted text-sm mt-1">How Aria appears across AI search engines right now</p>
+          <h1 className="text-2xl font-display text-navy">Nexus Velocity Card</h1>
+          <p className="text-xeo-muted text-sm mt-1">Nexus's Claude adoption across the five surfaces</p>
         </div>
         <ProgressRing score={progress.ariaScore} size={64} strokeWidth={7} />
       </div>
@@ -67,7 +67,7 @@ export function AriaReportCard({ progress }) {
       </motion.div>
 
       {/* Platform breakdown */}
-      <h2 className="text-sm font-bold text-xeo-muted uppercase tracking-wider mb-3">Platform Breakdown</h2>
+      <h2 className="text-sm font-bold text-xeo-muted uppercase tracking-wider mb-3">Adoption by Surface</h2>
       <div className="space-y-3 mb-6">
         {Object.entries(report.platforms).map(([platform, state], i) => (
           <motion.div key={platform} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.1 }}>
@@ -79,7 +79,7 @@ export function AriaReportCard({ progress }) {
       {/* Baseline issues (if score is low) */}
       {progress.ariaScore < 20 && (
         <div className="card p-5">
-          <h2 className="text-sm font-bold mb-3 text-red-600">⚠️ Aria's Baseline Issues</h2>
+          <h2 className="text-sm font-bold mb-3 text-red-600">⚠️ Nexus Baseline Issues</h2>
           <div className="space-y-1.5">
             {ARIA_BASELINE_ISSUES.map((issue, i) => (
               <div key={i} className="flex items-start gap-2 text-xs text-xeo-muted">
@@ -88,7 +88,7 @@ export function AriaReportCard({ progress }) {
               </div>
             ))}
           </div>
-          <p className="text-xs text-xeo-muted mt-3">Complete more modules to fix these issues and improve Aria's Citation Score.</p>
+          <p className="text-xs text-xeo-muted mt-3">Complete more modules to fix these issues and improve Nexus's Velocity Score.</p>
         </div>
       )}
 
@@ -98,13 +98,13 @@ export function AriaReportCard({ progress }) {
           <h2 className="text-sm font-bold mb-3 text-navy">What's improved</h2>
           <div className="space-y-2">
             {[
-              { threshold: 5,  label: 'Aria knows the landscape — aware of AI search dynamics', done: progress.ariaScore >= 5 },
-              { threshold: 15, label: "SEO foundation fixed — AI crawlers can now access Aria's content", done: progress.ariaScore >= 15 },
-              { threshold: 30, label: 'Content optimized for citation — answer-first, FAQ sections added', done: progress.ariaScore >= 30 },
-              { threshold: 45, label: 'Third-party presence established — G2, LinkedIn, Reddit coverage', done: progress.ariaScore >= 45 },
-              { threshold: 60, label: 'Entity optimization complete — AI systems recognize Aria as a trusted entity', done: progress.ariaScore >= 60 },
-              { threshold: 80, label: 'Measurement framework in place — Share of Model being tracked', done: progress.ariaScore >= 80 },
-              { threshold: 90, label: 'Continuous optimization loop operational', done: progress.ariaScore >= 90 },
+              { threshold: 5,  label: 'Foundations set — team understands how Claude works and where to apply it', done: progress.ariaScore >= 5 },
+              { threshold: 15, label: 'Claude.ai adopted — Projects, co-work, and artifacts in daily use', done: progress.ariaScore >= 15 },
+              { threshold: 30, label: 'Claude Code deployed — engineers using agentic workflows and CLAUDE.md', done: progress.ariaScore >= 30 },
+              { threshold: 45, label: 'First API harness live — agent in production with proper tool schemas', done: progress.ariaScore >= 45 },
+              { threshold: 60, label: 'Workflows standardized — repeatable AI patterns documented and shared', done: progress.ariaScore >= 60 },
+              { threshold: 80, label: 'Automation integrated — CI/CD hooks, MCP servers, and evals in place', done: progress.ariaScore >= 80 },
+              { threshold: 90, label: 'Culture shift complete — Claude embedded in onboarding and team norms', done: progress.ariaScore >= 90 },
             ].map((milestone, i) => (
               <div key={i} className={`flex items-start gap-2 text-xs ${milestone.done ? 'text-navy' : 'text-xeo-muted opacity-40'}`}>
                 <span className={milestone.done ? 'text-green-600' : 'text-xeo-muted'}>

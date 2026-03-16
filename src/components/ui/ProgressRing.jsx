@@ -1,4 +1,4 @@
-export function ProgressRing({ score, size = 80, strokeWidth = 7, label = 'Citation Score' }) {
+export function ProgressRing({ score, size = 80, strokeWidth = 7, label = 'Velocity Score' }) {
   const r = (size - strokeWidth) / 2
   const circ = 2 * Math.PI * r
   const offset = circ - (score / 100) * circ
