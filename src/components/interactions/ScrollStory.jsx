@@ -98,7 +98,14 @@ function generateBeats(lessons) {
         })
         lesson.keyPoints?.forEach(point => {
           const isObj = typeof point === 'object' && point !== null
-          beats.push({ type: 'concept_point', text: isObj ? point.text : point, visual: isObj ? (point.visual ?? null) : null, sourceUrl: isObj ? (point.sourceUrl ?? null) : null, sourceLabel: isObj ? (point.sourceLabel ?? null) : null })
+          beats.push({
+            type: 'concept_point',
+            text: isObj ? point.text : point,
+            explain: isObj ? (point.explain ?? null) : null,
+            visual: isObj ? (point.visual ?? null) : null,
+            sourceUrl: isObj ? (point.sourceUrl ?? null) : null,
+            sourceLabel: isObj ? (point.sourceLabel ?? null) : null,
+          })
         })
         break
 
@@ -418,14 +425,21 @@ function PlatformRevealBeat({ beat, revealCount }) {
 }
 
 // CONCEPT_POINT — single key point, arrow accent
-function ConceptPointBeat({ beat }) {
+function ConceptPointBeat({ beat, plainLanguage }) {
   return (
     <div className="w-full max-w-xl mx-auto px-4 md:px-6">
       <div className="flex gap-4 items-start">
         <div className="shrink-0 w-3 h-[2px] bg-flame-400 mt-[1.1rem]" />
-        <p className="text-2xl md:text-3xl font-display text-navy leading-snug">
-          {beat.text}
-        </p>
+        <div>
+          <p className="text-2xl md:text-3xl font-display text-navy leading-snug">
+            {beat.text}
+          </p>
+          {plainLanguage && beat.explain && (
+            <p className="mt-3 text-sm text-navy/50 leading-relaxed border-l-2 border-aria-200 pl-3">
+              {beat.explain}
+            </p>
+          )}
+        </div>
       </div>
       {beat.visual && (
         <IllustrationRenderer
@@ -525,7 +539,7 @@ function BeforeAfterBeat({ beat }) {
 }
 
 // Beat dispatcher — isVisible passed through to beats that need it for animations
-function BeatContent({ beat, isVisible, revealCount }) {
+function BeatContent({ beat, isVisible, revealCount, plainLanguage }) {
   switch (beat.type) {
     case 'narrative':       return <NarrativeBeat beat={beat} />
     case 'stat':            return <StatBeat beat={beat} />
@@ -535,7 +549,7 @@ function BeatContent({ beat, isVisible, revealCount }) {
     case 'insight':         return <InsightBeat beat={beat} />
     case 'platform':        return <PlatformBeat beat={beat} />
     case 'platform_reveal': return <PlatformRevealBeat beat={beat} revealCount={revealCount ?? 1} />
-    case 'concept_point':   return <ConceptPointBeat beat={beat} />
+    case 'concept_point':   return <ConceptPointBeat beat={beat} plainLanguage={plainLanguage} />
     case 'before_after':    return <BeforeAfterBeat beat={beat} />
     case 'chapter':         return <ChapterBeat beat={beat} />
     case 'discipline':      return <DisciplineBeat beat={beat} />
@@ -553,7 +567,7 @@ function BeatContent({ beat, isVisible, revealCount }) {
 //   • seenBeats: a Set that only grows — once a beat is seen, it stays animated
 //   • onComplete fires 1.8s after the final beat enters view
 
-export function ScrollStory({ lessons, onComplete }) {
+export function ScrollStory({ lessons, onComplete, plainLanguage = false }) {
   const beats = useMemo(() => generateBeats(lessons), [lessons])
 
   // Index of the platform_reveal beat (−1 if none), and how many platforms it has
@@ -894,6 +908,7 @@ export function ScrollStory({ lessons, onComplete }) {
                   beat={beat}
                   isVisible={isVisible}
                   revealCount={i === platformRevealIdx ? revealCount : undefined}
+                  plainLanguage={plainLanguage}
                 />
               </motion.div>
 

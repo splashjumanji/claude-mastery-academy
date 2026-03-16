@@ -41,7 +41,7 @@ export const MODULES = {
         keyPoints: [
           { text: 'Claude.ai — the conversational interface. Projects, artifacts, and co-work mode. Best for thinking, planning, and knowledge work.' },
           { text: 'Claude Code — the agentic CLI tool. Lives in your terminal, reads your codebase, edits files directly. Best for engineering work.' },
-          { text: 'Claude API — the raw building block. Messages, tools, and structured output. Best for building your own AI-powered systems.' },
+          { text: 'Claude API — the raw building block. Messages, tools, and structured output. Best for building your own AI-powered systems.', explain: '"Messages" are how you send text to Claude in code. "Tools" are actions Claude can call (like searching the web or reading a file). "Structured output" means Claude returns data in a precise, machine-readable format rather than conversational prose. Together these let you build software with Claude as its brain.' },
         ],
       },
       {
@@ -256,8 +256,8 @@ export const MODULES = {
         body: 'Claude Code started in the terminal, but now it runs everywhere: your terminal, VS Code, JetBrains, a desktop app, the web, and even Slack. It reads your codebase, understands your project structure, and edits files with your permission.',
         type: 'concept',
         keyPoints: [
-          { text: 'Install: npm install -g @anthropic-ai/claude-code — requires Node.js 18+.' },
-          { text: 'Run: cd your-project && claude — it reads your project and you start chatting.' },
+          { text: 'Install: npm install -g @anthropic-ai/claude-code — requires Node.js 18+.', explain: 'npm is the Node.js package manager — a tool for installing software from the internet. The -g flag means "install globally" so Claude Code is available from any folder on your computer, not just one project. Node.js 18+ means you need a fairly recent version of Node.js already on your machine.' },
+          { text: 'Run: cd your-project && claude — it reads your project and you start chatting.', explain: 'cd means "change directory" — you\'re navigating into your project folder in the terminal. The && just means "and then." So this two-part command takes you to your project and launches Claude Code in one step. Claude immediately reads your files to understand the codebase before you type anything.' },
           { text: 'Also available as: VS Code extension, JetBrains plugin, Desktop app (macOS/Windows), Web (claude.ai/code), and in Slack.' },
           { text: 'Every file edit requires your approval. You see the diff before anything changes.' },
           { text: 'Start a task on the web or iOS app, then pull it into your terminal with /teleport.' },
@@ -283,10 +283,10 @@ export const MODULES = {
         keyPoints: [
           { text: 'Put it at the root of your repo (./CLAUDE.md or ./.claude/CLAUDE.md). Claude Code picks it up automatically.' },
           { text: 'Include: tech stack, naming conventions, testing approach, common patterns, do/don\'t rules.' },
-          { text: 'Use @imports to reference other files: "See @README for project overview and @package.json for available npm commands."' },
-          { text: 'Organize team rules in .claude/rules/*.md — each file loads automatically when relevant.' },
+          { text: 'Use @imports to reference other files: "See @README for project overview and @package.json for available npm commands."', explain: '@imports let you link to other files in your CLAUDE.md without copying their contents in. Claude Code reads those linked files automatically, keeping your main instruction file short and tidy. Think of it like footnotes that Claude actually follows.' },
+          { text: 'Organize team rules in .claude/rules/*.md — each file loads automatically when relevant.', explain: '.claude/ is a folder in your project that holds Claude-specific settings. The *.md means "any file ending in .md" — Markdown, a simple text format for documents. Breaking conventions into separate files means Claude only reads what\'s relevant to the task, keeping things focused.' },
           { text: 'Use /init to bootstrap a CLAUDE.md for your project. Claude reads the codebase and drafts one for you.' },
-          { text: 'Auto memory: Claude also learns from corrections you make and saves them to ~/.claude/memory.json. View with /memory.' },
+          { text: 'Auto memory: Claude also learns from corrections you make and saves them to ~/.claude/memory.json. View with /memory.', explain: '~/ is shorthand for your personal home folder on your computer. So ~/.claude/memory.json is a file stored there, just for you. Whenever you correct Claude Code, it saves a note to itself in that file. /memory is a command you type inside Claude Code to review what it has learned about your preferences.' },
         ],
       },
       {
@@ -374,7 +374,7 @@ export const MODULES = {
         keyPoints: [
           { text: 'Context = everything Claude can "see": your message, system prompt, CLAUDE.md, conversation history, uploaded files.' },
           { text: 'Claude\'s context window is large (200K tokens for Sonnet) but not infinite. Managing it is a skill.' },
-          { text: 'Tokens ≈ words × 1.3. A 200K context window ≈ 150,000 words, or about 300 pages.' },
+          { text: 'Tokens ≈ words × 1.3. A 200K context window ≈ 150,000 words, or about 300 pages.', explain: 'Tokens are the units Claude thinks in — roughly one token per word, but punctuation, spaces, and word fragments add up. The "context window" is how much Claude can hold in mind at once during a conversation. 200,000 tokens is large — it can read an entire novel and still have room for your messages.' },
           { text: 'More context is not always better. Relevant context >> large context.' },
         ],
       },
@@ -399,9 +399,9 @@ export const MODULES = {
         type: 'concept',
         keyPoints: [
           { text: 'Start new conversations for new tasks. Don\'t reuse a conversation about auth to discuss database schema.' },
-          { text: 'Use /compact in Claude Code to summarize the conversation so far and free up context space.' },
+          { text: 'Use /compact in Claude Code to summarize the conversation so far and free up context space.', explain: 'As a conversation gets longer, it fills Claude\'s memory. /compact asks Claude to replace the detailed back-and-forth with a tight summary, keeping the key facts while freeing up space. Think of it like collapsing a long email thread into a single paragraph before continuing.' },
           { text: 'In Claude.ai, use Projects to keep persistent context separate from conversation context.' },
-          { text: 'For the API: system prompts are re-sent every turn. Keep them tight and relevant.' },
+          { text: 'For the API: system prompts are re-sent every turn. Keep them tight and relevant.', explain: 'Every time you send a message through the API, Claude receives your setup instructions again along with your new message — it can\'t remember them from before. Think of it like re-attaching the same cover letter to every email in a thread. The longer the instructions, the more each message costs, so only include what Claude genuinely needs each time.' },
         ],
       },
     ],
@@ -491,7 +491,7 @@ export const MODULES = {
         type: 'concept',
         keyPoints: [
           { text: '"Think step by step" improves accuracy on complex tasks by 10-30% across benchmarks.' },
-          { text: 'Extended thinking (API): Claude reasons in a hidden scratchpad before giving its final answer.' },
+          { text: 'Extended thinking (API): Claude reasons in a hidden scratchpad before giving its final answer.', explain: 'When you enable extended thinking, Claude works through the problem privately first — like doing rough work before writing the final answer. You don\'t see the scratchpad, but the final response is more accurate because of it. You pay for the thinking time even though it\'s hidden.' },
           { text: 'Best for: debugging, architecture decisions, multi-file refactors, complex analysis.' },
           { text: 'Not needed for: simple generation, formatting, straightforward Q&A.' },
         ],
@@ -502,9 +502,9 @@ export const MODULES = {
         body: 'In the API, you can prefill the beginning of Claude\'s response to steer the format. Start the assistant message with "{" to get JSON. Start with "```python" to get Python code. This is one of the most underused techniques.',
         type: 'concept',
         keyPoints: [
-          { text: 'Prefilling: set the first few characters of the assistant response to guide format.' },
-          { text: 'Tool use: define structured tool schemas for reliable, typed JSON output.' },
-          { text: 'API tool_use is more reliable than asking for JSON in the prompt. Use it for production systems.' },
+          { text: 'Prefilling: set the first few characters of the assistant response to guide format.', explain: 'You can start Claude\'s reply for it by writing the first few characters. If you open with "{" Claude will continue with JSON. If you open with "```python" it will write Python code. It\'s a nudge that steers the output format reliably without needing a long instruction.' },
+          { text: 'Tool use: define structured tool schemas for reliable, typed JSON output.', explain: 'Instead of asking Claude to "respond in JSON," you define a tool — like a form Claude fills in. Each field has a name and type (text, number, true/false). Claude completes it and you get back predictable, structured data that\'s easy to use in your code without extra clean-up.' },
+          { text: 'API tool_use is more reliable than asking for JSON in the prompt. Use it for production systems.', explain: 'When you just ask Claude to "respond in JSON," it sometimes adds commentary, wraps the JSON in code fences, or formats it slightly wrong. The tool_use system bypasses all of that — Claude treats the tool like a form to submit, and the output is clean and consistent every time.' },
           { text: 'For Claude Code: just be explicit about the format you want. "Output as a markdown table" works well.' },
         ],
       },
@@ -598,7 +598,7 @@ export const MODULES = {
         body: 'MCP is an open protocol created by Anthropic that standardizes how AI tools connect to external systems. Think of it as USB-C for AI: one standard plug that works with many devices.',
         type: 'concept',
         keyPoints: [
-          { text: 'Install MCP servers via claude mcp add. Claude Code discovers their tools automatically.' },
+          { text: 'Install MCP servers via claude mcp add. Claude Code discovers their tools automatically.', explain: 'MCP servers are small programs that give Claude access to external systems — like GitHub, databases, or internal tools. Running claude mcp add tells Claude Code about one of them. After that, Claude can see and use its tools without any extra setup, like installing an app and finding it ready in your dock.' },
           { text: 'The GitHub MCP server lets Claude Code manage issues, review PRs, and read repo contents.' },
           { text: 'A database MCP server lets Claude query your database directly to answer questions about data.' },
           { text: 'You can build custom MCP servers for internal systems: deployment tools, monitoring, feature flags.' },
@@ -610,10 +610,10 @@ export const MODULES = {
         body: 'Skills are Claude Code\'s extensibility system. Each skill lives in a .claude/skills/<name>/ folder with a SKILL.md file containing YAML frontmatter (name, description) and detailed instructions. Claude auto-discovers skills and uses them when relevant.',
         type: 'concept',
         keyPoints: [
-          { text: 'Create: mkdir -p .claude/skills/review && edit .claude/skills/review/SKILL.md with frontmatter and instructions.' },
+          { text: 'Create: mkdir -p .claude/skills/review && edit .claude/skills/review/SKILL.md with frontmatter and instructions.', explain: 'mkdir -p creates a folder (and any needed parent folders). The && chains two commands: first create the folder, then open a file to edit. "Frontmatter" is a small block of structured metadata at the top of the file — like a label that tells Claude what the skill is called and when to use it.' },
           { text: 'Skills can include templates, examples, and scripts alongside SKILL.md for richer behavior.' },
           { text: 'Bundled skills: /batch (parallel file processing via worktrees), /debug, /loop (recurring tasks), /simplify, /claude-api.' },
-          { text: '/loop 5m check if the deploy finished — runs a prompt every 5 minutes on a schedule.' },
+          { text: '/loop 5m check if the deploy finished — runs a prompt every 5 minutes on a schedule.', explain: '/loop is a built-in Claude Code skill that repeats a task on a schedule. "5m" means every 5 minutes. This lets Claude Code monitor something — a build, a deploy, a test run — and report back automatically without you having to keep checking yourself.' },
           { text: 'Share skills via the repo. New team members inherit your best practices automatically.' },
         ],
       },
@@ -700,7 +700,7 @@ export const MODULES = {
           { text: '"Commit these changes with a descriptive message" — Claude reads the diff and writes a meaningful commit message.' },
           { text: '"Explain the last 5 commits" — Claude summarizes recent changes for context.' },
           { text: '"Help me resolve this merge conflict" — Claude reads both versions and suggests a resolution.' },
-          { text: 'Hooks: use pre-commit hooks to run Claude Code in headless mode for automated checks.' },
+          { text: 'Hooks: use pre-commit hooks to run Claude Code in headless mode for automated checks.', explain: 'A pre-commit hook is a script that runs automatically every time you try to save a code change. Headless mode means Claude runs silently in the background with no human interaction. Together, this gives you a silent reviewer that checks for issues before any code is committed — like a checkpoint before the gate.' },
         ],
       },
       {
@@ -709,8 +709,8 @@ export const MODULES = {
         body: 'Claude Code can run in headless mode (no human in the loop). This unlocks CI/CD integration: automated code reviews on every PR, automated test generation, automated documentation updates.',
         type: 'concept',
         keyPoints: [
-          { text: 'claude -p "Review this PR for security issues" --output-format json — runs without interaction, outputs structured results.' },
-          { text: 'Use in GitHub Actions: run Claude Code as a step in your CI pipeline.' },
+          { text: 'claude -p "Review this PR for security issues" --output-format json — runs without interaction, outputs structured results.', explain: '-p means "prompt" — you\'re giving Claude its task directly in the command, like a sticky note. --output-format json means "return results as machine-readable data instead of a conversational response." This lets other automated tools (like GitHub Actions) read and act on Claude\'s output without a human in the middle.' },
+          { text: 'Use in GitHub Actions: run Claude Code as a step in your CI pipeline.', explain: 'GitHub Actions is a system that automatically runs scripts when code changes happen — like running tests on every pull request. A CI pipeline is that sequence of automated checks. By adding Claude Code as a step, it can review, document, or analyse changes in the background as part of your team\'s normal workflow, with no one having to ask.' },
           { text: 'Caution: headless mode has no human approval gate. Set clear constraints in your prompts.' },
           { text: 'Best for: code review, linting, documentation checks, test coverage analysis.' },
         ],
@@ -805,9 +805,9 @@ export const MODULES = {
         body: 'An "agent harness" is the code that wraps around the LLM. It sends messages, checks for tool calls in the response, executes tools, and sends results back. The harness is what turns a raw API into an autonomous agent.',
         type: 'concept',
         keyPoints: [
-          { text: '1. Send a message to Claude with tool definitions (JSON schemas with name, description, input_schema).' },
-          { text: '2. Check the response: does it have stop_reason: "tool_use"?' },
-          { text: '3. If yes: extract tool_use blocks, execute each tool, send results back as tool_result content blocks.' },
+          { text: '1. Send a message to Claude with tool definitions (JSON schemas with name, description, input_schema).', explain: 'A tool definition is a description you send to Claude explaining what a tool does and what it needs to use it. A JSON schema is a structured format that lists each input field, its type, and whether it\'s required — like a form Claude has to fill out each time it wants to call that tool.' },
+          { text: '2. Check the response: does it have stop_reason: "tool_use"?', explain: 'When Claude wants to run a tool instead of just replying, it sets a flag in its response called stop_reason to "tool_use." Checking this flag tells your code whether Claude is done talking or is asking you to run something on its behalf before it continues.' },
+          { text: '3. If yes: extract tool_use blocks, execute each tool, send results back as tool_result content blocks.', explain: 'A tool_use block is Claude\'s request to run a specific tool with specific inputs. Your code pulls that out, runs the actual function, then sends the result back to Claude as a tool_result — so Claude can continue reasoning with that new information and decide its next step.' },
           { text: '4. If no tool_use: Claude is done. Return the final text response.' },
           { text: 'Also available: Anthropic-defined tools like computer_use and text_editor that extend Claude\'s built-in capabilities.' },
         ],
@@ -821,7 +821,7 @@ export const MODULES = {
           { text: 'Each tool has: name, description, and input_schema (JSON Schema format).' },
           { text: 'Good description: "Search the web using Exa.ai. Returns titles, URLs, and summaries for the top N results."' },
           { text: 'Bad description: "search" — Claude won\'t know when or how to use it.' },
-          { text: 'Use strict types: enum for categorical inputs, required for mandatory fields.' },
+          { text: 'Use strict types: enum for categorical inputs, required for mandatory fields.', explain: 'An enum is a list of allowed values — like a dropdown menu. If a field can only be "low", "medium", or "high", defining it as an enum stops Claude from inventing other values. Marking fields as "required" means Claude can\'t skip them, which prevents incomplete tool calls that would break your code.' },
         ],
       },
     ],
@@ -909,7 +909,7 @@ export const MODULES = {
         body: 'The Claude API uses a messages format: you send an array of messages (system prompt + conversation history + user message), and Claude responds. Each response can contain text blocks AND tool_use blocks.',
         type: 'concept',
         keyPoints: [
-          { text: 'POST to https://api.anthropic.com/v1/messages with model, max_tokens, system, messages, and tools.' },
+          { text: 'POST to https://api.anthropic.com/v1/messages with model, max_tokens, system, messages, and tools.', explain: 'POST is a standard web request type for sending data to a server. You\'re sending your conversation history (messages), your setup instructions (system), which Claude model to use, the maximum response length (max_tokens), and the list of available tools. The server runs Claude and returns its response.' },
           { text: 'response.content is an array of blocks: text blocks and/or tool_use blocks.' },
           { text: 'Each tool_use block has an id, name (which tool), and input (the arguments Claude chose).' },
           { text: 'You execute the tool and send back a tool_result message with the matching id.' },
@@ -933,10 +933,10 @@ export const MODULES = {
         body: 'Production agents need robust error handling. API rate limits, tool failures, malformed responses, and context overflow are all common. Plan for them from the start.',
         type: 'concept',
         keyPoints: [
-          { text: 'Rate limiting: implement exponential backoff with jitter. The API returns 429 when you hit limits.' },
+          { text: 'Rate limiting: implement exponential backoff with jitter. The API returns 429 when you hit limits.', explain: 'Rate limiting is when the API says "you\'re sending too many requests, slow down" — it signals this with a 429 error code. Exponential backoff means waiting progressively longer between retries: 1 second, then 2, then 4, then 8. "Jitter" adds a small random amount to each wait so multiple clients don\'t all retry at the exact same moment and overwhelm the server again.' },
           { text: 'Tool failures: return clear error messages to Claude so it can adapt. Never swallow errors silently.' },
           { text: 'Context overflow: summarize earlier conversation turns when context gets too long.' },
-          { text: 'Malformed output: parse JSON defensively. Claude occasionally wraps JSON in markdown code blocks.' },
+          { text: 'Malformed output: parse JSON defensively. Claude occasionally wraps JSON in markdown code blocks.', explain: 'Sometimes Claude wraps JSON in triple backticks (```json ... ```) as if it\'s presenting it in a chat. Your code expects raw JSON and breaks. Parsing "defensively" means checking for this wrapper and stripping it before reading the data — handling the imperfection gracefully rather than crashing.' },
         ],
       },
       {
@@ -1186,8 +1186,8 @@ export const MODULES = {
         type: 'concept',
         keyPoints: [
           { text: 'Log token counts from every API response: input_tokens, output_tokens, cache_creation_input_tokens, cache_read_input_tokens.' },
-          { text: 'Prompt caching pricing: cache writes cost 1.25x base input price. Cache reads cost 0.1x — that is a 90% saving on repeated context.' },
-          { text: 'Cache has a 5-minute default TTL (refreshed on each use). Optional 1-hour TTL available at 2x base price.' },
+          { text: 'Prompt caching pricing: cache writes cost 1.25x base input price. Cache reads cost 0.1x — that is a 90% saving on repeated context.', explain: 'If you send the same large instructions with every API call, caching stores them once on Anthropic\'s servers. The first storage costs a little more (1.25x), but every time you reuse it costs only 1/10 of normal (0.1x). For an agent that runs hundreds of times with the same system prompt, this adds up to enormous savings.' },
+          { text: 'Cache has a 5-minute default TTL (refreshed on each use). Optional 1-hour TTL available at 2x base price.', explain: 'TTL stands for "time to live" — how long the cached version is kept before it expires. The default is 5 minutes, which resets every time it\'s used. If your agent runs less frequently, you can pay a bit more (2x) to keep the cache alive for a full hour before it needs to be rewritten.' },
           { text: 'Batch API: for non-time-sensitive workloads, get 50% cost reduction. Pass up to 100,000 requests per batch.' },
           { text: 'Use Haiku for high-volume, simpler tasks. Reserve Sonnet/Opus for complex reasoning. This alone can cut costs 5-10x.' },
         ],
@@ -1266,10 +1266,10 @@ export const MODULES = {
         type: 'concept',
         keyPoints: [
           { text: 'Rate limiting: implement queuing and backoff. The API returns 429 with retry-after headers when you hit limits.' },
-          { text: 'Prompt caching: add cache_control: {"type": "ephemeral"} to cache system prompts and tools. 0.1x read cost after initial write.' },
+          { text: 'Prompt caching: add cache_control: {"type": "ephemeral"} to cache system prompts and tools. 0.1x read cost after initial write.', explain: 'This small JSON snippet attached to your instructions tells the API to store them server-side after the first call. Every subsequent call gets a 90% discount on those tokens. "Ephemeral" means it\'s short-lived (5 minutes by default) rather than permanent — you\'re caching for the current burst of activity, not forever.' },
           { text: 'Batch API: for non-time-sensitive workloads — 50% cost reduction, up to 100K requests per batch, results within 24 hours.' },
           { text: 'Monitoring: log every agent run (inputs, outputs, tool calls, duration, cost, success/failure).' },
-          { text: 'Streaming: required when max_tokens > 21,333. Use .stream() with .get_final_message() for simple integration.' },
+          { text: 'Streaming: required when max_tokens > 21,333. Use .stream() with .get_final_message() for simple integration.', explain: 'Normally the API waits until Claude finishes writing before sending back anything. Streaming sends words as they\'re generated — like a live transcript. It\'s required for very long responses because otherwise the connection would time out. .stream() and .get_final_message() are SDK helper methods that handle the streaming plumbing for you.' },
         ],
       },
       {
@@ -1293,7 +1293,7 @@ export const MODULES = {
         type: 'concept',
         keyPoints: [
           { text: 'Computer use: Claude can control a screen — click, type, navigate. Opens up entirely new agent types.' },
-          { text: 'Hooks: 15+ lifecycle events (PreToolUse, PostToolUse, SessionStart, etc.) let you intercept and extend Claude Code behavior with scripts.' },
+          { text: 'Hooks: 15+ lifecycle events (PreToolUse, PostToolUse, SessionStart, etc.) let you intercept and extend Claude Code behavior with scripts.', explain: 'Hooks are trigger points in Claude Code\'s execution where your own scripts can run. PreToolUse fires just before Claude uses a tool — you could log it, inspect it, or block it. PostToolUse fires after. SessionStart fires when Claude Code opens. This gives you fine-grained control over what Claude does without modifying Claude itself.' },
           { text: 'Agent SDK: Anthropic\'s official framework for building production agent harnesses with built-in patterns.' },
           { text: 'Sub-agents: built-in Claude Code support for parallel work, custom agent types, foreground/background execution.' },
           { text: 'Model improvements: each new Claude version brings better reasoning, tool use, and cost efficiency.' },
