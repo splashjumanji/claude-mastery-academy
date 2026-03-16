@@ -800,8 +800,7 @@ export function ScrollStory({ lessons, onComplete }) {
   }, [platformRevealIdx, platformCount])
 
   // ── Last-beat gesture-gated advance ──
-  // Replaces the old setTimeout(onComplete, 1800) auto-timer.
-  // Stays on the last beat; only a new deliberate downward scroll fires onComplete.
+  // Stays on the last beat; only a new deliberate downward scroll/swipe fires onComplete.
   useEffect(() => {
     if (beats.length === 0) return
     let gestureEndTimer = null
@@ -826,9 +825,32 @@ export function ScrollStory({ lessons, onComplete }) {
       onComplete()
     }
 
+    // Touch support for mobile — a deliberate downward swipe on the last beat
+    let lastBeatTouchStartY = 0
+    const handleTouchStart = (e) => {
+      if (currentIdxRef.current !== beats.length - 1) return
+      lastBeatTouchStartY = e.touches[0].clientY
+      // Reset gate so a fresh gesture can fire onComplete
+      waitForLastBeatGestureRef.current = false
+    }
+    const handleTouchEnd = (e) => {
+      if (currentIdxRef.current !== beats.length - 1) return
+      if (completedRef.current) return
+      if (isLockedRef.current) return
+      const dy = lastBeatTouchStartY - e.changedTouches[0].clientY
+      if (dy > 40) {  // swipe upward on screen = scroll down through content
+        completedRef.current = true
+        onComplete()
+      }
+    }
+
     window.addEventListener('wheel', handleWheel, { passive: true })
+    window.addEventListener('touchstart', handleTouchStart, { passive: true })
+    window.addEventListener('touchend', handleTouchEnd, { passive: true })
     return () => {
       window.removeEventListener('wheel', handleWheel)
+      window.removeEventListener('touchstart', handleTouchStart)
+      window.removeEventListener('touchend', handleTouchEnd)
       clearTimeout(gestureEndTimer)
     }
   }, [beats.length, onComplete])
