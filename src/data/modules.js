@@ -170,12 +170,12 @@ export const MODULES = {
       {
         id: 'l2_4',
         heading: 'Co-work: delegation, not dictation.',
-        body: 'Co-work mode lets Claude work on artifacts autonomously while you keep chatting. Ask it to write a technical RFC, then discuss team priorities while it works. When it finishes, review and refine.',
+        body: 'Co-work mode lets Claude work on artifacts autonomously while you keep chatting. Ask it to write a technical Request for Comments (RFC), then discuss team priorities while it works. When it finishes, review and refine.',
         type: 'concept',
         keyPoints: [
           { text: 'Co-work is ideal for longer generation tasks: design docs, code reviews, research summaries.' },
           { text: 'You set the direction, Claude executes. Review when ready.' },
-          { text: 'Tip: be specific in your delegation prompt. "Write a 500-word RFC for migrating to event-driven auth" beats "write something about auth".' },
+          { text: 'Tip: be specific in your delegation prompt. "Write a 500-word Request for Comments (RFC) for migrating to event-driven auth" beats "write something about auth".' },
         ],
       },
     ],
@@ -466,7 +466,7 @@ export const MODULES = {
         body: 'Forget "magic words." The best prompt engineering technique is breaking complex tasks into clear, specific sub-tasks. Claude excels when it knows exactly what you want, in what format, with what constraints.',
         type: 'concept',
         keyPoints: [
-          { text: 'Be specific: "Write a function that validates email addresses using RFC 5322 regex" beats "write an email validator."' },
+          { text: 'Be specific: "Write a function that validates email addresses using Request for Comments 5322 (RFC 5322) regex" beats "write an email validator."' },
           { text: 'Specify format: "Return a JSON object with fields: valid (boolean), reason (string)."' },
           { text: 'Set constraints: "Maximum 50 lines. No external dependencies. Must handle edge cases: empty string, null, unicode."' },
           { text: 'Give examples: one good input/output example is worth 100 words of description.' },
