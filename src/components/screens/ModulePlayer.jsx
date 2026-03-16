@@ -184,7 +184,7 @@ export function ModulePlayer({ onModuleComplete }) {
         )
 
       case 'buildstep':
-        return <BuildAlong moduleId={module.id} onComplete={() => advancePhase()} />
+        return <BuildAlong moduleId={module.id} onComplete={() => advancePhase()} plainLanguage={plainLanguage} />
 
       case 'coming_soon':
         return <ComingSoon module={module} onComplete={(score) => advancePhase(score)} />
